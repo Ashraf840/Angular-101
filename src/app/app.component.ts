@@ -49,7 +49,7 @@ export class AppComponent {
 
   // }
 
-  // Demonstration of "ngOnDestroy" lifecycle hook, it'll be destroyed in the container component; since this component is passed as content inside the container component
+  // Demonstration of "ngOnDestroy" lifecycle hook, since the "eomplyee" component will be destroyed; the "ngOnDestroy" will be invoked in the "employee" component.
   showEmployeeComponent = true;
 
   toggleEmployee() {
