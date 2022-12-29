@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class EmployeeComponent {
   empName: string = "John";
 
-  
+  // "ngOnDestroy" is invoked here, because it's destroyed in the "app" component regardless of  being passed as content in the "container" component
   ngOnDestroy() {
     console.log(`ngOnDestroy lifecycle hook is called!`);
   }
