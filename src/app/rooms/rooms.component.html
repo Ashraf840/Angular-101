@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<h2 style="color:crimson;">Room Component</h2>
+<h1>Welcome to {{ hotelName }} </h1>
+<hinv-header></hinv-header>
+
+<!-- Demonstration of @ViewChildren followed by @ViewChild.
+    The first template will get property but the rest of the tags won't because of "@ViewChild" decorator. 
+-->
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+
+
+<!-- This will cost performance issues; since they're not entirely rmeoved from the DOM elems -->
+<div [hidden]="hideRooms">
+    <small><b>"ngStyle" is used here. "ngStyle" also accepts variables. <br/>
+        <span><i>If "room.avaiableRooms" exists, the font-color will be green 
+            & font-weight will be 900. Otherwise, the font-color will be red 
+            & font-weight will be 200.</i></span>
+    </b></small>
+    <p [ngStyle]="{
+        'color': room.avaiableRooms ? 'green' : 'red',
+        'font-weight': room.avaiableRooms ? 900 : 200
+    }"
+    >Number of Rooms: <span [innerText]="numOfRooms"></span></p>
+    <small>"Number of Rooms" has changed it's value using "Property Binding"</small>
+</div>
+
+<br />
+<button (click)="toggle()">Toggle/Hide</button>
+<br /><br />
+
+<h3>Binding Syntax Types:</h3>
+<ul>
+    <b>
+        <li>Interpolation</li>
+        <li>Property Binding</li>
+        <li>Event Binding</li>
+    </b>
+</ul>
+
+
+<h3>Angular Built-in Directives</h3>
+<p>Directives are classes that add additional behavior to elements in your Angular applications.
+    Use Angular's built-in directives to manage forms, lists, styles, and what users see.</p>
+<ul>
+    <b>
+        <b>Structural Directives:
+            <span>These can add/remove your DOM Elements!</span>
+        </b>
+        <li>*ngIf</li>
+        <li>*ngFor</li>
+        <li>*ngSwitch --- *ngSwitchCase</li>
+        <small>The "*" as a prefix will distinguish the structural directives from the attribute directives</small>
+        <hr>
+        <b>Attribute Directives:
+            <span>Probably add/remove attributes from your DOM Elements!</span>
+        </b>
+        <li>ngClass: related to css styling</li>
+        <li>ngStyle: related to css styling</li>
+        <li>ngModel</li>
+    </b>
+</ul>
+
+
+<h3>Nullish Coalescing & Optional Chaining</h3>
+
+<p>
+    Nullish Coalescing: Before accessing the property of an object, firstly check if that exist or not. <br />
+    No. of available rooms: {{ room.avaiableRooms ?? "No Rooms" }}
+</p>
+
+
+<br />
+<p>
+    Optional Chaining: Won't show room list, if the room object doesn't contain any property yet.
+</p>
+<p>Already know how to bind string, number, boolean and objects. Not bind arrays using structural directives "*ngFor".
+</p>
+
+
+<h3>*ngIf & *ngFor</h3>
+
+<div class="row">
+    <div class="col"><button class="btn btn-secondary"
+        (click)="addRoom()">Add Room</button></div>
+    <div class="col"><button class="btn btn-secondary"
+        (click)="changeRoomListTitle()">Modify Room List Title</button></div>
+</div>
+<!-- Rooms List: displays using "*ngIf" directive -->
+<!-- Only display if the number of rooms > 0 -->
+<!-- Since it's a structural directives, it's actually adding/removing the "div" -->
+<!-- It'll not exist even in the DOM elems if the condition doesn't match -->
+<!-- Build a table manually to loop through all the data in the list using "*ngFor", later it'll be changed to "Angular Material Table" (3rd party UI library) -->
+<div *ngIf="room?.avaiableRooms">
+    <!-- Replace roomList into separate component; "room" is a valid property of that component & is type of "RoomList" interface. "selectedRoom()" func came to parent-component form child using the @Output decorator in the child component "room-list" -->
+    <hinv-rooms-list [rooms]="roomList" [component_title]="title"
+        (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
+</div>
+
+<div *ngIf="!closeRoomList">
+    <div *ngIf="selectedRoom_P">
+        Any Selected Room Data: {{ selectedRoom_P | json }} <br>
+        <button class="btn btn-secondary"
+            (click)="closeRoomListInfo()"
+        >Close</button>
+    </div>
+</div>
+
+<br><hr>
+
+<h3>*ngSwitch</h3>
+<p>It is used inside the <b>"app.component.html"</b> file.</p>
+
+<hr>
+<div>
+    <b>
+        JsonPipe: Mostly used for debugging purpose.<br><br>
+        View all the rooms list in a JSON format. <br>
+        <button (click)="josnViewToggle()">View JSON format</button>
+    </b>
+    <p *ngIf="!jsonView"> {{ roomList }} </p>
+    <p *ngIf="jsonView"> {{ roomList | json  }} </p>
+</div>
+
+<hr>
+<h3>Pipes</h3>
+<p>Pipes are used for data transformation. Pipes don't change actual object.</p>
+<p>Types of Built-in Pipes:</p>
+<ul>
+    <b>
+        <li>DataPipe</li>
+        <li>TitleCasePipe</li>
+        <li>UpperCasePipe</li>
+        <li>LowerCasePipe</li>
+        <li>CurrencyPipe</li>
+        <li>DecimalPipe: Rounds down to the closest integer number.</li>
+        <li>PercentPipe</li>
+        <li>JsonPipe: Useful mostly for debugging purpose. It can be applied on both array/object. Should be used for debugging purpose only, not meant to be used in production.</li>
+        <li>SlicePipe: Similar to slice function available in JS. Works in "<b>*ngFor</b>".
+            (<small>Better not to use "<b>slicePipe</b>" for pagination, instead use server-side pagination</small>)
+        </li>
+        <li>AsyncPipe</li>
+    </b>
+</ul>
+
+<hr>
+
+<h3>Styling Framework</h3>
+<p>Initially, integrate <b>NGX Bootstrap <small>(or, 
+    <a href="https://ng-bootstrap.github.io/#/getting-started#installation">NG Bootstrap</a>
+    - used & working)</small></b><br/>
+<span>Installed using the cmd: <b>ng add @ng-bootstrap/ng-bootstrap</b></span>
+</p>
+<p>Then, re-integrate to <b>Angular Material</b></p>
+<p>Lastly, integrate to <b>Tailwind CSS</b></p>
+
+
+<hr>
+
+<h3>Lifecycle Hooks
+    <span><h5>(parallely Component Communication)</h5></span>
+</h3>
+<p>Lifecycle hooks are a special functionality (method) in Angular that allow us to “<b>hook into</b>” and run code at a specific lifecycle event of a component or directive. Angular manages components and directives for us when it creates them, updates them, or destroys them. <br>
+The following lifecycle hooks will always <b>maintains the order</b> as they are defined below.
+Other than the following lifecycle hooks, "constructor" is the one which will be first called while each component gets initialized.</p>
+<ul>
+    <b>
+        <li>ngOnChange:
+            <small>(Change detection) By default, changes in any component (both parent & child) will send an event to the root component & that will start running change detection to each & every component. There are some rules before applying chage-detection strategy to the components (child). Add "changeDetection" property to the "Component" decorator. It'll detect any changes to your input values. The property has 2 strategies: "Default" & "OnPush"
+                <ul>
+                    <li>Default: It's implied by default. Any event will cause to run change detection for the application, when the 'changeDetectionStrategy' is set to "Default".</li>
+                    <li>OnPush: This change detection strategy can only be applied in case no data is getting modified internally in that specified component. This startegy is also applicable to any state-management-technique. <br>
+                    Here, we'll use this strategy in the "rooms-list" component. Since this component relies on data coming from outside, also it doen't change the data internally. <br>
+                    N.B: While working with this strategy, the data which is about to be assigned into the child-component needs to be immutable. Thus rather than modifying the "roomList" array using push, return a new object everytime we modify the instance. Implement the ngOnChange lifecycle hook into "room-list" component.
+                    </li>
+                </ul>
+                Prerequisites: <br>
+                <ul>
+                    <li>The targeted component should not change the data internally.</li>
+                    <li>In case of assigning/passing some data, it should come from the parent component.</li>
+                    <li>The property should be immutable. In case of passing of data to the child component, while this strategy is applied on that child component, pass a new instance everytime.</li>
+                    <li>"ngOnChange" will only work in case the component has @Input property & if that gets new value. Then you'll get some data regarding the change on this lifecycle hook. General properties of this hook as passed as an param ("changes") are: "currentValue", "firstChange", "previousValue". Based on this we can write custom logic as per our requirements.</li>
+                </ul> 
+                Concepts Learned in this lifecycle hook:<br>
+                <ul>
+                    <li>Component communication by passing data using @Input & @Output</li>
+                    <li>Change detection strategy: Default & OnPush</li>
+                </ul>
+            </small>
+        </li> <br>
+        <li>ngOnInit: 
+            <small>Just after the constructor initializes the component, "ngOnInit" lifecycle will be invoked. All the logic should be written here, the constructor should be used only when we want to inject some services. It's the initialization of the component.</small>
+        </li> <br>
+        <li>ngDoCheck:
+            <small>This lifecyle hook is hardly used. This lifecycle hooks gets invoked everytime whenever any event is raised anywhere in the entire application, irrespective of where this component is implmented of available. It's more like a radar/signals (in python-dj). THUS THIS LIFECYCLE HOOK IS VERY COSTLY. <br>
+            NB: DON'T IMPLEMENT "ngOnChange" & "ngDoCheck" HOOKS TOGETHER IN THE SAME COMPONENT. TRY TO AVOID THIS HOOK AS MUCH AS POSSIBLE.
+            Use Cases:
+            <ul>
+                <li>Click the logout button, which is placed some corner of your screen. Capture that event by this hook & Implement logic as required.</li>
+            </ul>
+            </small>
+        </li> <br>
+        <li>ngAfterContentInit:
+            <small>
+                While the contents are being initialized completely in the parent component ("app") meant to pass to the "container" component, then we can access & modify the content inside the "ngAfterContentInit" lifecycle of the container-component.
+                <br>
+                Prerequisites: <br>
+                <ul>
+                    <li>Content Projection: </li>
+                    <li>"ng-content" Tag (Container Component): While we want to insert content dynamically inside a component, then we use the "ng-content" tag, which will later replaced by the contents while Angular parses that content into the parent component. <br>
+                    By using "ng-content", we can define the sequence in which we want to load our components. <br>
+                    The "ng-content" can create container components which can be a reuseable component accross mulitple application in the Angular project. <br>
+                    NB: "employee" component is created, so that we can demonstrate the sequence of components loading through the "container" component. The sequence will be defined in the container component's template. After defining the sequence inside the container-component's template, we've to pass the template-tag of the desired components which are defined in the container-component's template regardless of the defined sequence. <br>
+                    <span style="color:rgb(63, 236, 40);">Sequence of Component Loading</span>: &nbsp;&nbsp; "employee" -> "container" -> "rooms"
+                    </li>
+                    <li>@ContentChild decorator: We can access & modify any of the content which is passed to the "ng-content" of the container from the parent component. Although it doesn't have any such property called "static=true", since the components which will be passed as content to the container-component required to be loaded first.</li>
+                </ul>
+            </small>
+        </li> <br>
+        <li>ngAfterContentChecked</li> <br>
+        <li>ngAfterViewInit:
+            <small>
+                In this lifecycle hook, the component of itself is denoting the view that it contains is also initialized. Thus, if I try to load any other component into this component, it's ready to load that as well. Simply It'll load other component only after the template of this parent component is initialized.
+                <br> 
+                <span class="text-danger">NB:</span> This "rooms" component is new dynamically rendered by the combination of @ViewChild decorator & "ngAfterViewInit" lifecycle hook from the main "app" component. <br>
+                Prerequisites: <br>
+                <ul>
+                    <li>@ViewChild: We can communicate / load a component by using "ViewChild" decorator into another component. <br>
+                    Procedure of using @ViewChild: Create a new separate component "header" in the "src\app" dir & communicate to that using "ViewChild". <br>
+                    Use properties of that separate component ("header") into another component ("rooms") using "@ViewChild" decorator. <br> 
+                    But here's the catch, immediately after getting the properties of that other component using @ViewChild, we cannot access its properties, unless we use the "ngAfterViewInit" lifecycle hook. Inside that interface we can access all the properties of that other component ("header"). <br>
+                    By default the "static" property is false in this decorator. But by using static=true, we can load the other component into this component's "ngOnInit" hook while they are also available into "ngAfterViewInit" hook. <br>
+                    NB: ONLY USE STATIC=TRUE IF THE OTHER COMPONENT DOESN'T CONTAIN ANY ASYNCHRONOUS CODE INTO IT'S "ngOnInit" hook. <br>
+                    static=true denotes that the component is safe to be used on the "ngOnInit" hook of it's parent component.
+                    Thus, it's always safe to use static=false & load the othe component into the parent component's "ngAfterViewInit" lifecycle hook. <br>
+                    NB: 
+                        <ul>
+                            <li>CAN LOAD COMPONENTS DYNAMICALLY WITHOUT SPECIFYING THEM IN THE TEMPLATE.</li>
+                            <li>@ViewChild CAN ONLY ACCESS THE FIRST INSTANCE AVAILABLE IN THE HTML TEMPLATE.</li>
+                        </ul>
+                    </li>
+                    <li>@ViewChildren: In case we've more than one instance in the template use this decorator. This decorator's "static" property is by default false & YOU CANNOT CHANGE IT, unlikely to the @ViewChild decorator, where your are able to change the "static" property. </li>
+                </ul> <br>
+                Concepts Learned in this lifecycle hook:<br>
+                <ul>
+                    <li>Access separate components using @ViewChild & load-modify them into another component.</li>
+                    <li>Dynamically Loaded Component: Components can be dynamically loaded using @ViewChild decorator, but required to load it inside the "ngAfterViewInit" hook. Which means, we don't need to define the component-tag into the template in a hard-coded manner.</li>
+                    <li>Modify the property of dynamically loaded component using @ViewChild. For this, "template reference" is used.</li>
+                    <li>"ng-template" (Angular elem): It's an Angular element that is used for rendering HTML in a template. However, it is not rendered directly on DOM, or it won't render anything itself, but it can help us to render some other template (component). If you include an ng-template tag to a template, the tag and the content inside it will be replaced by comment upon render. We can get access to the "ng-template" tag into the ".ts" file using "template reference" (#hashtag-name)<a href="https://flexiple.com/angular/ng-template/" style="color:rgb(63, 236, 40);" target="_blank">Learn More...</a></li>
+                </ul>
+            </small>
+        </li> <br>
+        <li>ngAfterViewChecked:
+            <small>This lifecycle hook is rarely used in the daily life.</small>
+        </li> <br>
+        <li>ngOnDestroy:
+            <small>
+                Destroy of any event is captured here. It's demonstration is implemented in "employee" component.
+            </small>
+        </li>
+    </b>
+</ul>
+
+<br>
+
+<p>Component Communication: Two or more components need to interact with each other. There are multiple ways to achieve the Component Communication.</p>
+<ul>
+    <li>Using @Input & @Output
+        <span>
+            <ul>
+                <li><b>@Input</b>: Makes the parent-component able to pass data into child-component.</li>
+                <li><b>@Output</b>: Makes the child-component able to pass data into parent component.</li>
+            </ul>
+        </span>
+    </li>
+    <li>Using @ViewChild & @ContentChild</li>
+    <li>Using services</li>
+</ul>
