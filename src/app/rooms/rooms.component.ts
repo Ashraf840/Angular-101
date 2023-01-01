@@ -1,6 +1,7 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './rooms';   // Room, RoomList interfaces
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'hinv-rooms',
@@ -75,7 +76,9 @@ export class RoomsComponent {
   }
 
   // Constructor: should be used only when we want to inject some services.
-  constructor() { }
+  // Inject (Dependency Injection) "RoomsService" instance & it'd be private.
+  // By following the "Singleton" pattern, the "RoomsService" is getting used as the GLOBAL instance of the service.
+  constructor(private roomsService: RoomsService) {}
 
   // @ViewChild works with the first instance inside the template
   // "ViewChild" decorator: to access property of other component (which is directly not the child-component of this component)
@@ -125,37 +128,6 @@ export class RoomsComponent {
   // e.g. Load data from API & display on your view, then write that code as part of "ngOnInit" lifecycle hook.
   ngOnInit(): void {
     // console.log(`"ngOnInit" lifecycle hook: `, this.headerComponent);   // cannot access, if the static=false or it's ommit inside the @ViewChild decorator
-    this.roomList = [
-      {
-        roomNumber: 1,
-        roomType: "Delux Room",
-        amenities: "Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen",
-        price: 500,
-        photos: "https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
-        checkinTime: new Date('06-Dec-2022'),
-        checkoutTime: new Date('08-Dec-2022'),
-        rating: 4.5,
-      },
-      {
-        roomNumber: 2,
-        roomType: "Double Delux Room",
-        amenities: "Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen, Playstation, Twin Beds",
-        price: 1000,
-        photos: "https://images.unsplash.com/photo-1444201983204-c43cbd584d93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-        checkinTime: new Date('07-Dec-2022'),
-        checkoutTime: new Date('09-Dec-2022'),
-        rating: 3.57452,
-      },
-      {
-        roomNumber: 3,
-        roomType: "Private Suite",
-        amenities: "Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen, Playstation, VR-box, Indoor Swimming Pool",
-        price: 15000,
-        photos: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-        checkinTime: new Date('10-Dec-2022'),
-        checkoutTime: new Date('18-Dec-2022'),
-        rating: 2.6,
-      },
-    ];
+    this.roomList = this.roomsService.getRooms();
   }
 }

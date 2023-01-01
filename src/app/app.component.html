@@ -21,7 +21,7 @@
     <hr><br>
     <!-- Employee component will be destroyed; thus "ngOnDestroy" hook will be invoked inside the "employee" component regardless of being passed as content in the "container" component -->
     <button class="btn btn-secondary"
-        (click)="toggleEmployee()">Toggle Employee component (destroyed inside "container" component)</button>
+        (click)="toggleEmployee()">Toggle Employee component (destroyed inside "employee" component)</button>
     <!-- "Content Project" for learning "ngAfterContentInit" lifecycle hook -->
     <hinv-container>
         <!-- Contents cannot be passed in such manner, unless that component has "ng-content" tag -->
