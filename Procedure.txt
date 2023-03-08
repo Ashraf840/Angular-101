@@ -1,0 +1,16 @@
+Procedure
+---------
+1. Initialize 'package.json' file using the cmd.  [ npm init ]
+2. Install typescript inside the node_modules.  [ npm i typescript ]
+3. Initialize typescript-configuration file.  [ npm tsc --init ]
+
+
+Compile TpeScript Code
+----------------------
+1. To compile a typescript file, use the cmd.  [ npx tsc fileName.ts ]
+    After compilation, it'll provide a compiled javaScript file.
+2. Use "node" to run the compiled javaScript file.  [ node fileName.js ]
+
+
+
+
