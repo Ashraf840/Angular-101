@@ -1,16 +1,15 @@
 Procedure
 ---------
-1. Initialize 'package.json' file using the cmd.  [ npm init ]
-2. Install typescript inside the node_modules.  [ npm i typescript ]
-3. Initialize typescript-configuration file.  [ npm tsc --init ]
+1. Initialize 'package.json' file using the cmd. It'll keep track of all the packages which will be installed & used in the workspace. (It's like a 'requirements.txt' file in terms of npm) [ npm init ]
+2. Install typescript inside the node_modules. It'll initialize "node_modules" containing typescript-packages.  
+    [ npm i typescript ]
+3. Initialize typescript-configuration file. It'll provide "tsconfig.json" file.  [ npm tsc --init ]
 
 
 Compile TpeScript Code
 ----------------------
 1. To compile a typescript file, use the cmd.  [ npx tsc fileName.ts ]
-    After compilation, it'll provide a compiled javaScript file.
+   After compilation, it'll provide a compiled javaScript file. To compile into a specific directory, use the following output.
+    [ npx tsc fileName.ts --outDir DIRECTORY/ ]
+   In case of this current file structure, use this CMD:  [ npx tsc fileName.ts --outDir ../compiled/x_topicDir/ ]
 2. Use "node" to run the compiled javaScript file.  [ node fileName.js ]
-
-
-
-

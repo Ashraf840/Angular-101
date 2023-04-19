@@ -3,4 +3,5 @@ Facts about TypeScript
 1. Although Typescript can auto-determine the type of the variable, it's not recommended.
 2. After declaring the type of a variable, we can actually get suggestions of functions only regarding that defined functions.
 3. Node can be used to run your javaScript code in your local machine.
+4. If we create a variable without defining it's type, TypeScript will define it's datatype using "type inferencing".
 

@@ -1,0 +1,8 @@
+Agenda
+------
+1. Data Types
+2. Type Inference: TypeScript can determine the type of the value it's assigned.
+3. Union & Intersection Types
+4. Generics
+5. Literal Types
+

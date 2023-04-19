@@ -1,0 +1,13 @@
+About Class concept in TypeScript
+---------------------------------
+We'll be using classes for writing services (getting data from the backend & displaying in the frontend), components.
+Business logics will be defined into the classes.
+
+1. Introduction to Class in TS
+2. Class properties
+    # Types of declaring class-properties
+3. Default & parameterized constructors
+4. Class methods: It doesn't require to define the "function" keyword explicitly inside of the Class
+5. Creating instance of Class
+6. Member visibility (incld. INHERITANCE, METHOD OVERRIDING, STATIC METHOD, GETTER-SETTER METHOD)
+7. Static members

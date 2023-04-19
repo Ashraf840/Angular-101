@@ -1,0 +1,7 @@
+Agenda
+------
+1. Different ways to write functions: Named function, Arrow function, Function expression
+2. Generic functions
+3. Optional parameters
+4. Required parameters
+5. Rest parameters

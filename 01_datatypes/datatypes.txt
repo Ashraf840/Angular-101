@@ -1,0 +1,13 @@
+Datatypes in TpeScript
+----------------------
+Primitive Datatypes: NUMBER, BOOLEAN, STRING. Other optional datatypes are UNDEFINED, NULL TYPES & SYMBOLS.
+
+STRING
+NUMBER
+BOOLEAN
+ARRAY: While array declaration, we can only declare a single datatype which it will contain. Declare before the "[]". 
+ENUM: An enum is a special "class" that represents a group of constants (unchangeable variables). They are defined with indexed-value. TypeScript provides both numeric and string-based enums.
+TUPLE: Typed-array with a pre-defined length & types for each index. Unlike array, tuple allow us to declare multiple datatypes in a single collection. Declare inside the "[]".
+ANY: Can assign any type of value in such variable which is of type ANY. It's recommended not to use ANY in the codebase unless it's an existing codebase. Rather use the correct datatypes.
+VOID
+NEVER
