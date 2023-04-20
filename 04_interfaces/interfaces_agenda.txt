@@ -1,0 +1,16 @@
+Agenda of Interfaces
+--------------------
+1. Creating Interfaces
+2. Using Interfaces as Types
+3. Implementing Interfaces
+4. Extending Interfaces
+5. Optional Properties
+6. Object destructuring
+7. Array destructuring
+
+
+Optional
+--------
+# Import/ Export class/method/interfaces between different files.
+# Filter a value out of objects-props from array.
+
