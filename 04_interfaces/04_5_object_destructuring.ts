@@ -7,7 +7,11 @@ let userProfile1: User = { name: "Jamil", age: 30, email: "jamil@gmail.com", pho
 // Get "name", "age", "phone" only from the object.
 console.log(`name: ${userProfile1.name}; age: ${userProfile1.age}; phone: ${userProfile1.phone}`);
 
-// Rather than getting only the "name", "age", "phone" through using a variable, implement "Object Destructuring" along with aliasing
+let { name, age, phone }: User = userProfile1;    // object destructuring over an existing object
+console.log(`name: ${name}; age: ${age}; phone: ${phone}`);
+
+// Rather than getting only the "name", "age", "phone" through using a variable, implement "Object Destructuring" along with variable-aliasing
+// "userProfileName1", "userProfileAge1" & "userProfilePhone1" are the alias of "name", "age" & "phone" variable.
 let { name: userProfileName1, age: userProfileAge1, phone: userProfilePhone1 }: User = userProfile1;    // object destructuring over an existing object
 console.log(`name: ${userProfileName1}; age: ${userProfileAge1}; phone: ${userProfilePhone1}`);
 

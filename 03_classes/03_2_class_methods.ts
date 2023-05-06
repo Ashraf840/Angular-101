@@ -1,6 +1,5 @@
 import { Login } from "../04_interfaces/04_4_method_definition_as_interface";
 import { User } from "../04_interfaces/04_1_interfaces";
-
 // Alternative of "import" statements - 1
 import * as TeslaModel from "../04_interfaces/04_2_func_as_interface_properties";
 
