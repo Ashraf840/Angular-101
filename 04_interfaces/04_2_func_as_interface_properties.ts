@@ -32,3 +32,7 @@ let teslaModelX2: TeslaModelX = {
 };
 console.log(`teslaModelX2:`, teslaModelX2);
 
+export {
+    teslaModelX1,
+    teslaModelX2,
+};

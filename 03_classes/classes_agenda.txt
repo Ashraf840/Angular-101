@@ -11,3 +11,4 @@ Business logics will be defined into the classes.
 5. Creating instance of Class
 6. Member visibility (incld. INHERITANCE, METHOD OVERRIDING, STATIC METHOD, GETTER-SETTER METHOD)
 7. Static members
+8. ALternative of "import" statements. (import module from another location)

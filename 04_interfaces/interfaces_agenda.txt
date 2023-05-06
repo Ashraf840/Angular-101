@@ -11,6 +11,6 @@ Agenda of Interfaces
 
 Optional
 --------
-# Import/ Export class/method/interfaces between different files.
+# Import/ Export class/method/interfaces between different files. (Alternative of "import" is used inside "03_classes/03_2_class_methods.ts")
 # Filter a value out of objects-props from array.
 

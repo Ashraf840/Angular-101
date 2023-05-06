@@ -9,7 +9,7 @@ interface User {
     name: string;
     age?: number;    // optional properties
     email: string;
-    phone?: string;
+    phone?: string;  // optional properties
     id: number;
 }
 
