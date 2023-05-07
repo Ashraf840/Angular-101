@@ -1,0 +1,7 @@
+Agenda of ESModules
+--------------------
+1. Introduction to ESModules
+2. Import / Export
+3. Compiling TypeScript to differnt JS version
+
+NB: Nothing is done in the YT Video Tutorial.

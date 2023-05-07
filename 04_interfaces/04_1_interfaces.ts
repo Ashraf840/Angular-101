@@ -13,6 +13,15 @@ interface User {
     id: number;
 }
 
+interface UserAddress {
+    flatNo?: string,
+    houseNo?: string,
+    street: string,
+    city: string,
+    state: string,
+    postCode: number,
+}
+
 let user1: User = { name: "Istiak", age: 27, email: "istiak@gmail.com", phone: "0123456789", id: 12 };
 console.log('use1:', user1);
 
@@ -23,7 +32,8 @@ console.log('user2:', user2);
 // Solution:  https://stackoverflow.com/a/60343829
 // Export Type-1
 export {
-    User
+    User,
+    UserAddress,
 };
 
 // Export Type-2:  Use the "export" keyword before the interface/class/function which will be used in another file.

@@ -10,6 +10,7 @@ class Employee6 {
     private _id: number;        // private property; cannot access this from object instance level
     protected name: string;     // protected property; useful while extending the class; avaiable only within the class itself & the child classes; not available in the class-instance level
     age: number;
+    address: string;
 
     // Getter: "id" property
     get empId (): number {
@@ -20,14 +21,19 @@ class Employee6 {
         this._id = id;
     }
 
-    constructor(id: number, name: string, age: number) {
+    constructor(id: number, name: string, age: number, address : string = "None") {
         this._id=id;
         this.name=name;
         this.age=age;
+        this.address=address;
     }
 
-    getNameWithAddress () : string {
+    getNameWithAge () : string {
         return `${this.name} is ${this.age} years old!`;
+    }
+
+    getNameWithAddress(): string {
+        return `${this.name} lives in ${this.address}.`
     }
 }
 
@@ -38,6 +44,9 @@ emp6 = new Employee6(42, "Himel", 26);
 emp6.empId = 43
 console.log(`Employee6 obj:`,emp6);
 console.log(`Employee ID:`, emp6.empId);    // calling the empID getter-method wihtout using parenthesis
+console.log(`Employee name & age:`, emp6.getNameWithAge());
+console.log(`Employee name & address:`, emp6.getNameWithAddress());
+
 
 
 // EXTENDING THE CLASS / INHERITANCE
@@ -66,4 +75,5 @@ let mngr: Manager;
 mngr = new Manager(23, "Mike", 41, "Cherish Drive");
 console.log(`Manager obj:`, mngr);
 console.log(`Employee absent count (static-method):`, Manager.getEmployeeAbsentCount());
+console.log(`Manager Office Address:`, mngr.getNameWithAddress());
 

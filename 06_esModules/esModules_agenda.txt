@@ -1,0 +1,11 @@
+Agenda of Decorators
+--------------------
+1. Introduction to Decorators: Used to modify the behavior of a class / method / property at runtime.
+2. Class Decorators
+3. Method Decorators
+
+** Brief observation on "tsconfig.json" file.
+- "outDir": Flag to emit compiled files into user-defined directory location.
+- "sourceMap": Flag used by the browser to redirect the user to TS file rather than the JS file while a error occur.
+
+NB: Nothing is done in the YT Video Tutorial.
