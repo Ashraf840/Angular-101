@@ -1,0 +1,42 @@
+<h2>Programming Books List!</h2>
+
+<!-- <div>
+    <input type="text" [(ngModel)]="inputVal">
+    <p>User Input:<b> {{ inputVal }} </b></p>
+</div> -->
+
+<br><br>
+
+<!-- <button (click)="handlieClick()" [disabled]="isDisabled">Show Books</button> -->
+<!-- <button (click)="toggleBooks()">Toggle Books</button> -->
+
+<!-- NB: Instead of using a function, the boolean-variable-changing can be done straightly inside the double-quotation where the function is called! -->
+<!-- <button (click)="isShow = !isShow">Toggle Books</button> -->
+
+<!-- Task: Instead of "Toggle Books", depict "Show Books" when "isShow=false" & vice versa -->
+<button (click)="isShow = !isShow">
+    <!-- Elaborated Conditions -->
+    <!-- <span *ngIf="isShow == false">Show Books</span>
+    <span *ngIf="isShow == true">Hide Books</span> -->
+
+    <!-- Concise Conditions -->
+    <!-- <span *ngIf="!isShow">Show Books</span>
+    <span *ngIf="isShow">Hide Books</span> -->
+
+    <!-- NB: Instead of using <span> tags, use <ng-container>. Unlike <span tag> this will render only the value 
+        of the <ng-container> tag to the html-template after conditional-checks. -->
+    <ng-container *ngIf="!isShow">Show Books</ng-container>
+    <ng-container *ngIf="isShow">Hide Books</ng-container>
+</button>
+
+<ul *ngIf="isShow">
+    <li>
+        <!-- Property Binding is implemented in the attrs of html elems; e.g 'src', 'alt' -->
+        <img [src]="src" [alt]="bookName" width="100" height="150">
+        <b> {{ bookName }} </b> by <b> {{ bookAuthor }} </b>
+    </li>
+    <li>
+        <img [src]="src2" [alt]="bookName2" width="100" height="150">
+        <b> {{ bookName2 }} </b> by <b> {{ bookAuthor2 }} </b>
+    </li>
+</ul>
