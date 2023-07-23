@@ -1,19 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 
+// Create an interface of type "Book"
+interface Book {
+  name: string;
+  author: string | string[];
+  image: string;
+  amount: number;
+}
+
+
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-  bookName: string = 'Clean Code';
-  bookAuthor: string = 'Robert C Martin';
-  src: string = 'https://m.media-amazon.com/images/I/41-sN-mzwKL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg';
+  // array of type "Book"
+  books: Book[] = [
+    {
+      name: 'clean code',   // Use pipes for title-casing the book nmaes
+      author: 'Robert C Martin',
+      image: 'https://m.media-amazon.com/images/I/41-sN-mzwKL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg',
+      amount: 700,
+    },
+    {
+      name: 'the pragmatic programmer',
+      author: 'David Thomas',
+      image: 'https://m.media-amazon.com/images/I/51IA4hT6jrL._SX380_BO1,204,203,200_.jpg',
+      amount: 850,
+    },
 
-  bookName2: string = 'The Pragmatic Programmer: Your Journey To Mastery, 20th Anniversary Edition (2nd Edition) 2nd Edition';
-  bookAuthor2: string = 'David Thomas';
-  src2: string = 'https://m.media-amazon.com/images/I/51IA4hT6jrL._SX380_BO1,204,203,200_.jpg';
-
+    {
+      name: 'Designing Data-Intensive Applications',
+      author: 'Martin Kleppmann',
+      image: 'https://m.media-amazon.com/images/I/514xvNk9rTL._SX379_BO1,204,203,200_.jpg',
+      amount: 600,
+    },
+    {
+      name: 'Design Patterns',
+      author: ['Erich Gamma', 'Richard Helm', 'Ralph Johnson', 'John Vlissides', 'Grady Booch'],
+      image: 'https://m.media-amazon.com/images/I/51XySwBKGuL._SX395_BO1,204,203,200_.jpg',
+      amount: 680,
+    },
+    {
+      name: 'Introduction to Algorithms',
+      author: ['Thomas H. Cormen', 'Charles E. Leiserson', 'Ronald L. Rivest', 'Clifford Stein'],
+      image: 'https://m.media-amazon.com/images/I/41SNoh5ZhOL._SX440_BO1,204,203,200_.jpg',
+      amount: 760,
+    },
+  ]
   
   constructor() {};
   

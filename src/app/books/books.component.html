@@ -1,4 +1,4 @@
-<h2>Programming Books List!</h2>
+<h1>Programming Books List!</h1>
 
 <!-- <div>
     <input type="text" [(ngModel)]="inputVal">
@@ -14,7 +14,7 @@
 <!-- <button (click)="isShow = !isShow">Toggle Books</button> -->
 
 <!-- Task: Instead of "Toggle Books", depict "Show Books" when "isShow=false" & vice versa -->
-<button (click)="isShow = !isShow">
+<!-- <button (click)="isShow = !isShow"> -->
     <!-- Elaborated Conditions -->
     <!-- <span *ngIf="isShow == false">Show Books</span>
     <span *ngIf="isShow == true">Hide Books</span> -->
@@ -25,18 +25,35 @@
 
     <!-- NB: Instead of using <span> tags, use <ng-container>. Unlike <span tag> this will render only the value 
         of the <ng-container> tag to the html-template after conditional-checks. -->
-    <ng-container *ngIf="!isShow">Show Books</ng-container>
-    <ng-container *ngIf="isShow">Hide Books</ng-container>
-</button>
+    <!-- <ng-container *ngIf="!isShow">Show Books</ng-container>
+    <ng-container *ngIf="isShow">Hide Books</ng-container> -->
+<!-- </button> -->
 
 <ul *ngIf="isShow">
-    <li>
-        <!-- Property Binding is implemented in the attrs of html elems; e.g 'src', 'alt' -->
+    <!-- Property Binding is implemented in the attrs of html elems; e.g 'src', 'alt' -->
+    <!-- <li>
         <img [src]="src" [alt]="bookName" width="100" height="150">
         <b> {{ bookName }} </b> by <b> {{ bookAuthor }} </b>
-    </li>
-    <li>
-        <img [src]="src2" [alt]="bookName2" width="100" height="150">
-        <b> {{ bookName2 }} </b> by <b> {{ bookAuthor2 }} </b>
-    </li>
+    </li> -->
+
+    <!-- Iterate using *ngFor; Depict the index values. -->
+    <!-- NB: 
+        - It's preferred to use *ngFor in an <ng-container> 
+        - Since this book-section is getting bigger, it'd be palced inside a child component
+    -->
+    <ng-container *ngFor="let book of books; let i=index">
+        <li class="book">
+            <!-- <p class="sno">{{ i+1 }}</p> -->
+            <img [src]="book.image" [alt]="book.name" width="100" height="150">
+            <p class="title">
+                <!-- Using "pipes" for string formatting -->
+                <b> {{ book.name | titlecase }} </b> by <b> 
+                    <!-- TODO: use a for-loop in <ng-contaier> if there are multiple authros of the book, single author name will be of blue-color & red-color for vice versa -->
+                    {{ book.author }}
+                </b>
+            </p>
+            <p  class="bookPrice">(Price: <b>{{ book.amount | currency:'BDT':'৳' }}</b>)</p>
+            <button>Add to Cart</button>
+        </li>
+    </ng-container>
 </ul>
