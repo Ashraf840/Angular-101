@@ -1,13 +1,13 @@
 ul {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
 }
 
 .book {
-    list-style: none;
-    text-overflow: ellipsis;
-    width: 20%;
+    /* list-style: none; */
+    /* text-overflow: ellipsis; */
+    /* width: 25%; */
     margin: 2rem;
-    text-align: center;
-    cursor: pointer;
+    /* text-align: center; */
+    /* cursor: pointer; */
 }

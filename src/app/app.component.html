@@ -3,5 +3,17 @@
 <!-- <app-books></app-books>
 <app-cart></app-cart> -->
 
+<!-- Global Navbar -->
+<nav class="flex justify-between p-4 bg-blue-800 text-white">
+    <div>
+        <h1 class="text-2xl cursor-pointer" routerLink="/">Books Shop</h1>
+    </div>
+    <div>
+        <button routerLink="/cart">
+            My Cart
+        </button>
+    </div>
+</nav>
+
 <!-- From now on, routing of each component will be handled by the <router-outlet> -->
 <router-outlet></router-outlet>

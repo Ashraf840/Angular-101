@@ -1,4 +1,4 @@
-<h1>Programming Books List!</h1>
+<!-- <h1>Programming Books List!</h1> -->
 
 <!-- <div>
     <input type="text" [(ngModel)]="inputVal">
@@ -32,7 +32,7 @@
 <!-- Prac-1: Create a toggle btn for showing/hiding the "list of books" [TESTED FOR "ngOnDestroy()", NOT USING CURRENTLY] -->
 <!-- <button (click)="isShow = !isShow">Toggle</button> -->
 
-<ul *ngIf="isShow">
+<ul *ngIf="isShow" class="flex flex-wrap">
     <!-- Property Binding is implemented in the attrs of html elems; e.g 'src', 'alt' -->
     <!-- <li>
         <img [src]="src" [alt]="bookName" width="100" height="150">
@@ -53,6 +53,8 @@
         <!-- NB: Not emitting anything from the child component -->
         <!-- <app-book (emitBook)="addToCart($event)" [book]="singleBook" class="book"></app-book> -->
 
-        <app-book [book]="singleBook" class="book"></app-book>
+        <!-- <app-book [book]="singleBook" class="book list-none text-ellipsis w-1/4 m-2"></app-book> -->
+        <app-book [book]="singleBook" class="book list-none text-ellipsis w-1/4 text-center cursor-pointer"></app-book>
+        <!-- <app-book [book]="singleBook" class="book list-none text-ellipsis w-1/4"></app-book> -->
     </ng-container>
 </ul>
