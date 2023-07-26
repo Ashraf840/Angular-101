@@ -1,0 +1,17 @@
+<li>
+    <!-- <p class="sno">{{ i+1 }}</p> -->
+    <img [src]="book.image" [alt]="book.name" width="100" height="150">
+    <p class="title">
+        <!-- Using "pipes" for string formatting -->
+        <b> {{ book.name | titlecase }} </b> by <b> 
+            <!-- TODO: use a for-loop in <ng-contaier> if there are multiple authros of the book, single author name will be of blue-color & red-color for vice versa -->
+            {{ book.author }}
+        </b>
+    </p>
+    <p  class="bookPrice">(Price: <b>{{ book.amount | currency:'BDT':'৳' }}</b>)</p>
+
+    <!-- if "isInCart == false", then show the "addToCart()" -->
+    <button *ngIf="!isInCart" (click)="addToCart()">Add to Cart</button>
+    <!-- if "isInCart == true", then show the "removeFromCart()" -->
+    <button *ngIf="isInCart" (click)="removeFromCart()">Remove from Cart</button>
+</li>

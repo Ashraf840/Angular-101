@@ -1,0 +1,14 @@
+<h1>Cart Items</h1>
+
+<!-- if the cart is empty, then depict "No books available!" -->
+<div *ngIf="getCart().length > 0">
+    <h5>Total Item: {{ getCart().length }}</h5>
+
+    <!-- Loop over all the book names which are inside the cart -->
+    <ul *ngFor="let book of getCart()">
+        <li> {{ book.name | titlecase }} </li>
+    </ul>
+</div>
+<div *ngIf="getCart().length === 0">
+    <h5>Cart is empty!</h5>
+</div>

@@ -1,0 +1,3 @@
+# Create a service (books.service.ts) which includes "books.service.spec.ts" file. But this is not required currently, it'll require while testing the service.
+    To generate a service under a component:   ng generate service componentName/serviceName
+    Preferable serviceName:  serviceName = componentname
