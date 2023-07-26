@@ -1,4 +1,6 @@
-<!-- <h1>Programming Books List!</h1> -->
+<div class="text-center mt-7">
+    <h1 class="text-3xl">Programming Books List!</h1>
+</div>
 
 <!-- <div>
     <input type="text" [(ngModel)]="inputVal">
@@ -32,7 +34,8 @@
 <!-- Prac-1: Create a toggle btn for showing/hiding the "list of books" [TESTED FOR "ngOnDestroy()", NOT USING CURRENTLY] -->
 <!-- <button (click)="isShow = !isShow">Toggle</button> -->
 
-<ul *ngIf="isShow" class="flex flex-wrap">
+
+<ul *ngIf="isShow" class="flex flex-wrap justify-center">
     <!-- Property Binding is implemented in the attrs of html elems; e.g 'src', 'alt' -->
     <!-- <li>
         <img [src]="src" [alt]="bookName" width="100" height="150">
@@ -54,7 +57,7 @@
         <!-- <app-book (emitBook)="addToCart($event)" [book]="singleBook" class="book"></app-book> -->
 
         <!-- <app-book [book]="singleBook" class="book list-none text-ellipsis w-1/4 m-2"></app-book> -->
-        <app-book [book]="singleBook" class="book list-none text-ellipsis w-1/4 text-center cursor-pointer"></app-book>
+        <app-book [book]="singleBook" class="book list-none text-ellipsis w-1/4 text-center cursor-pointer mx-7 my-7 p-4 border rounded-md"></app-book>
         <!-- <app-book [book]="singleBook" class="book list-none text-ellipsis w-1/4"></app-book> -->
     </ng-container>
 </ul>

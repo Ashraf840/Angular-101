@@ -43,6 +43,12 @@ export class BooksService {
         image: 'https://m.media-amazon.com/images/I/41SNoh5ZhOL._SX440_BO1,204,203,200_.jpg',
         amount: 760,
       },
+      {
+        name: 'Code: The Hidden Language of Computer Hardware and Software (2nd Edition)',
+        author: 'Charles Petzold',
+        image: 'https://m.media-amazon.com/images/I/41L2wQmAi8L._SX383_BO1,204,203,200_.jpg',
+        amount: 680,
+      },
     ]
   }
 }
