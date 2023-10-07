@@ -24,6 +24,7 @@ console.log(arr_4);
 
 
 // Literal type of assignment: The var cannot have anything else other than the following defined types
+// (Later such scnario will be handled with Enums)
 let seatAllotmentAirbus: "aisle" | "middle" | "window";
 
 seatAllotmentAirbus = "aisle";
