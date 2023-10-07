@@ -1,3 +1,4 @@
+# How to setup TypeScript for project manually
 1. Initiate 'tsconfig.json' file initially for a project.
 > tsc --init
 2. Create an html file (index.html) in the root directory.
