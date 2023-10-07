@@ -1,0 +1,15 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "1. Initiate 'tsconfig.json' file initially for a project > tsc --init 2. Create an html file (index.html) in the root directory. 3. Create 2 directories (src; dist) in the root directory.     - 'src' dir: Holds the TS files.     - 'dist' dir: Holds the transpiled JS files. 4. Modify the 'tsconfig.json' file, to emit the transpiled files into './dist' directory. > \"outDir\": \"./dist\",                                   /* Specify an output folder for all emitted files. */",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "author": "Tanjim Ashraf",
+  "license": "ISC",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
