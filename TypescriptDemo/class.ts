@@ -14,6 +14,7 @@ console.log("John class-object - w/o constructor:", john);
 
 
 class Employee2 {
+    // #id: number; // Private property
     id: number;
     name: string;
     address: string;
@@ -23,8 +24,28 @@ class Employee2 {
         this.name = name;
         this.address = address;
     }
-}
 
+    getNameWithAddress(): string {
+        return `${this.name} stays at ${this.address}`;
+    }
+}
 let doe = new Employee2(2, "Doe", "55 South Avenue");
 console.log("Doe class-object - w/ constructor:", doe);
+
+console.log(doe.getNameWithAddress());
+
+
+// Class Inheritance
+class Manager extends Employee2 {
+    constructor(id: number, name: string, address: string) {
+        super(id, name, address);
+    }
+
+    getNameWithAddress(): string {
+        return `${this.name} is the manager at ${this.address}`;
+    }
+}
+let mike = new Manager(3, "Mike", "Cherise Drive");
+console.log(mike.getNameWithAddress());
+
 
