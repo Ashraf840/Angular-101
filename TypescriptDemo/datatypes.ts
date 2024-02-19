@@ -25,7 +25,7 @@ let empList: [];   // Define as an array type of "any"
 let names: string[]; // Define as an array type of "String"; Cannot add a number as element here
 names = ["Tanjim1", "Tanjim2", "Tanjim3"];
 console.log("names:", names);
-let generics_number: Array<number>; // Generics; Define as an array type of "Number"; Generics
+let generics_number: Array<number>; // Generics; Define as an array type of "Number"
 generics_number = [1, 2, 3, 4, 5];
 console.log("generics_number:", generics_number);
 
@@ -76,7 +76,7 @@ console.log("Swapped nums:", swapNums);
 // Access each value using the index number
 console.log("First value:", swapNums[0]);
 console.log("Second value:", swapNums[1]);
-// console.log(swapNums[2]);   // Throw an error duer to index is out of range
+// console.log(swapNums[2]);   // Throw an error due to index is out of range
 
 
 // Datatype: Any
