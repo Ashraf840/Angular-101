@@ -73,3 +73,16 @@ function swapNumber(num1: number, num2: number): [number, number] {
 
 swapNums = swapNumber(10, 20);
 console.log("Swapped nums:", swapNums);
+// Access each value using the index number
+console.log("First value:", swapNums[0]);
+console.log("Second value:", swapNums[1]);
+// console.log(swapNums[2]);   // Throw an error duer to index is out of range
+
+
+// Datatype: Any
+// NB: Try to avoid uisng this datatype as much as possible
+let department: any;
+// This variable can store any kind of datatype now
+department = "IT";
+department = 1001;
+

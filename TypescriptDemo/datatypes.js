@@ -56,3 +56,7 @@ function swapNumber(num1, num2) {
 }
 swapNums = swapNumber(10, 20);
 console.log("Swapped nums:", swapNums);
+// Access each value using the index number
+console.log("First value:", swapNums[0]);
+console.log("Second value:", swapNums[1]);
+// console.log(swapNums[2]);   // Throw an error duer to index is out of range
