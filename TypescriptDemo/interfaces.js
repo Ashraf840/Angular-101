@@ -21,3 +21,8 @@ var userIntf3 = {
     salary: 30000
 };
 console.log("Extend interface:", userIntf3);
+// Notes: Interfaces do not exist in JS, 
+// thus after completing the compilation from TS to JS, 
+// the interfaces will be removed. So there is a big question, 
+// when to use classes and when to use interfaces? 
+// The answer is simple, if we want to retain the type, use classes.
