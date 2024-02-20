@@ -1,14 +1,14 @@
 {
-  "name": "typescript_demo",
+  "name": "typescriptdemo",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "array_destructuring.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Tanjim Ashraf",
   "license": "ISC",
   "dependencies": {
     "typescript": "^5.3.3"
-  },
-  "description": ""
+  }
 }
