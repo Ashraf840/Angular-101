@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var userIntf1 = {
+let userIntf1 = {
     name: "John Doe",
     age: 24,
     id: 1001,
@@ -8,13 +8,13 @@ var userIntf1 = {
 };
 console.log("Custom data type:", userIntf1);
 // Demonstrate optional property
-var userIntf2 = {
+let userIntf2 = {
     name: "Ryan Gosling",
     id: 1002,
     email: "ryan@gosling.com"
 };
 console.log("Custom data type - Opetional property:", userIntf2);
-var userIntf3 = {
+let userIntf3 = {
     name: "Histesh Chowdhury",
     id: 1003,
     email: "hitesh@chowdhury.com",
