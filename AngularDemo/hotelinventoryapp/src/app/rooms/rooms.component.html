@@ -1,0 +1,58 @@
+<!-- Tempalte Syntax -->
+
+<!-- Interpolation "hotelName" -->
+<h1>Welcom to {{ hotelName }}</h1>
+
+<!-- Based on the example of event-binding (Porperty Binding); "hidden" is a valid html-property -->
+<div [hidden]="hideRooms">
+    <!-- Property Binding / Dynamically bind property on any valid html property using the square-brackets -->
+    <p>Number of rooms: <span [innerText]="numOfRooms"></span></p>
+</div>
+
+<!-- Show a message if available rooms are greater than 0 using "*ngIf" directive. -->
+<div *ngIf="rooms.availableRooms > 0">
+    <h3 style="color:coral;">**Rooms are available</h3>
+</div>
+
+<!-- Show a message if "availableRooms" property doesn't exist in the object using null coalescing -->
+<!-- {{ rooms.bookedRooms ?? "No rooms are booked" }} -->
+
+<!-- NB: Doesn't require Optional Chaining since if the object doesn't have the property, angular will simple show nothing regarding that property -->
+<div>
+    <b>No. of available room: {{ rooms.availableRooms }}</b>
+</div>
+
+<!-- Event Binding / By using banana-syntax "()" -->
+<button (click)="toggle()">Toggle</button>
+
+<!-- Using "*ngFor" directive to display array of records; -->
+<div>
+    <h3>Total Room List</h3>
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Even/Odd</th>
+            <th>Room ID</th>
+            <th>Room Type</th>
+            <th>Amenities</th>
+            <th>Price</th>
+            <th>Picture</th>
+            <th>Checkin</th>
+            <th>Checkout</th>
+        </tr>
+        <!-- Track even/odd rows; as well as index numbers -->
+        <tr *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ e ? "Even" : "Odd" }}</td>
+            <td>{{ room.id }}</td>
+            <td>{{ room.roomType }}</td>
+            <!-- Not adding the comma (,) after the last amenity -->
+            <td><span *ngFor="let amenities of room.amenities; last as last"><b>{{ amenities }}<span
+                            *ngIf="!last">,&nbsp;</span> </b></span></td>
+            <td>{{ room.price }}</td>
+            <td>{{ room.picture }}</td>
+            <td>{{ room.checkinTime }}</td>
+            <td>{{ room.checkoutTime }}</td>
+        </tr>
+    </table>
+</div>
