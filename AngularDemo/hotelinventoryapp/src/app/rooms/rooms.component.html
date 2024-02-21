@@ -14,6 +14,11 @@
     <h3 style="color:coral;">**Rooms are available</h3>
 </div>
 
+<!-- Using of "ngStyle" to change inline styling conditionally -->
+<div [ngStyle]="{'color': rooms.availableRooms > 0 ? 'green' : 'red'}">
+    <h3>(<small>**using "ngStyle"</small>) Rooms are available</h3>
+</div>
+
 <!-- Show a message if "availableRooms" property doesn't exist in the object using null coalescing -->
 <!-- {{ rooms.bookedRooms ?? "No rooms are booked" }} -->
 
@@ -41,7 +46,8 @@
             <th>Checkout</th>
         </tr>
         <!-- Track even/odd rows; as well as index numbers -->
-        <tr *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
+        <!-- Using of "ngClass" to toggle html attr-class conditionally -->
+        <tr [ngClass]="e? 'even':'odd'" *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
             <td>{{ i+1 }}</td>
             <td>{{ e ? "Even" : "Odd" }}</td>
             <td>{{ room.id }}</td>

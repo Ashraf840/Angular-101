@@ -1,2 +1,15 @@
 <h1>Hello World</h1>
-<hinv-rooms></hinv-rooms>
+
+<!-- Demonstration of "ngSwitch": if the user-role is "Admin", only then the rooms-component will be displayed -->
+<!-- Bu using "ngSwitchCase" the view-components can be toggled -->
+<div [ngSwitch]="role">
+    <div *ngSwitchCase="'User'">
+        Welcome User!
+    </div>
+    <div *ngSwitchCase="'Admin'">
+        <hinv-rooms></hinv-rooms>
+    </div>
+    <div *ngSwitchDefault>
+        You are not authorized to view this page!
+    </div>
+</div>
