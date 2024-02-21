@@ -19,6 +19,7 @@ export class RoomsComponent implements OnInit {
     bookedRooms: 5
   }
 
+  showRoomListJson = false; // Checking JsonPipe (Pipes)
   roomList: RoomList[] = [
     {
       "id": "65d58f008a4ac953b95825a7",
