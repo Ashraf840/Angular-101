@@ -1,0 +1,30 @@
+on: 
+    push:
+      branches:
+        - ts_practise_1802024
+jobs:
+    pull-request:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Open PR
+            id: open_pr
+            uses: rematocorp/open-pull-request-action@v1
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              from-branch: ts_practise_1802024
+              to-branch: angular_revision_21022024_auto_merge
+              repository-owner: Ashraf840
+              repository: Angular-101
+              
+          - name: Echo mergeable PR number
+            run: echo ${{ steps.open_pr.outputs.pull_number }}
+        
+
+    merge:  
+        needs: pull-request
+        runs-on: ubuntu-latest
+        steps:
+            - name: Merge pull request
+              uses: sudo-bot/action-pull-request-merge@v1.1.1
+              with: 
+                github-token: ${{ secrets.GITHUB_TOKEN }}
