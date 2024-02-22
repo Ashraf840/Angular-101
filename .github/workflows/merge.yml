@@ -19,17 +19,12 @@ jobs:
             run: echo ${{ steps.open_pr.outputs.pull_number }}
           - name: Get Commit Message
             run: |
-              echo "::set-output name=message::${{ github.event.head_commit.message }}"
+              echo "Commit message: ${{ github.event.head_commit.message }}"
     merge-branch:
       runs-on: ubuntu-latest
       steps:
-        - name: Action Checkout
-          uses: actions/checkout@v2
-        - name: Get PR Commit Message
-          run: |
-            echo "Commit message was: ${{ needs.pull-request.outputs.commit.message }}"
-        - name: Branch Merge Automation
-          uses: everlytic/branch-merge@1.1.2
+        - uses: actions/checkout@v2
+        - uses: everlytic/branch-merge@1.1.2
           with:
             github_token: ${{ github.token }}
             source_ref: ts_practise_1802024
