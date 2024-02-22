@@ -4,10 +4,20 @@ on:
       - ts_practise_1802024
 jobs:
   pull-request:
-    uses: repo-sync/pull-request@v2
-    with:
-      destination_branch: "angular_revision_21022024_auto_merge"
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open PR
+        id: open_pr
+        uses: rematocorp/open-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          from-branch: change_this
+          to-branch: change_this
+          repository-owner: change_this
+          repository: change_this
+          
+      - name: Echo mergeable PR number
+        run: echo ${{ steps.open_pr.outputs.pull_number }}
 
   merge:  
     needs: pull-request
