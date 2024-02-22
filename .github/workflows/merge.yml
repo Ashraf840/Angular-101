@@ -27,14 +27,3 @@ jobs:
             source_ref: ts_practise_1802024
             target_branch: angular_revision_21022024_auto_merge
             commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
-
-    # merge:  
-    #     needs: pull-request
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - name: Merge pull request
-    #           uses: sudo-bot/action-pull-request-merge@v1.1.1
-    #           with: 
-    #             github-token: ${{ secrets.GITHUB_TOKEN }}
-
-
