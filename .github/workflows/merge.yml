@@ -21,6 +21,12 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
+          with:  
+            ref: ts_practise_1802024
+        - run: |
+            git fetch origin ts_practise_1802024
+            git fetch origin angular_revision_21022024_auto_merge
+
         - uses: everlytic/branch-merge@1.1.2
           with:
             github_token: ${{ github.token }}
