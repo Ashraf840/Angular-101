@@ -19,7 +19,6 @@ jobs:
             run: echo ${{ steps.open_pr.outputs.pull_number }}
           - name: Get Commit Message
             run: |
-              echo "Commit message: ${{ github.event.head_commit.message }}"
               echo "::set-output name=message::${{ github.event.head_commit.message }}"
     merge-branch:
       runs-on: ubuntu-latest
