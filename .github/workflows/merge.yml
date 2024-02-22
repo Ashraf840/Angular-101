@@ -18,12 +18,6 @@ jobs:
               max-attempts: 30
           - name: Echo mergeable PR number
             run: echo ${{ steps.open_pr.outputs.pull_number }}
-          - name: Check PR status
-            uses: rematocorp/wait-for-check-action@v1  
-            with:
-              github-token: ${{ secrets.GITHUB_TOKEN }}
-              check-name: pull_request # Status context name
-              max-attempts: 30  # Increased this as well
     merge-branch:
       runs-on: ubuntu-latest
       steps:
