@@ -10,6 +10,7 @@
         <th>Picture</th>
         <th>Checkin</th>
         <th>Checkout</th>
+        <th>Select Room</th>
     </tr>
     <!-- Track even/odd rows; as well as index numbers -->
     <!-- Using of "ngClass" to toggle html attr-class conditionally -->
@@ -28,5 +29,10 @@
         <td>{{ room.picture }}</td>
         <td>{{ room.checkinTime | date: 'dd-MM-yyyy' }}</td>
         <td>{{ room.checkoutTime | date: 'dd-MM-yyyy' }}</td>
+        <td>
+            <button class="btn btn-primary" (click)="selectRoom(room)">
+                Select
+            </button>
+        </td>
     </tr>
 </table>
