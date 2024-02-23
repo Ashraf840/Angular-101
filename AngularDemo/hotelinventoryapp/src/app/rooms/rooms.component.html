@@ -45,3 +45,8 @@
     <h3>Room list (json-response)</h3>
     <p>{{ roomList | json }}</p>
 </div>
+
+<div *ngIf="selectedRoom">
+    <h3>Selected Room (json-response)</h3>
+    <p>{{ selectedRoom | json }}</p>
+</div>
