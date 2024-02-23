@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { RoomList } from '../rooms';
 
 @Component({
@@ -9,10 +9,19 @@ import { RoomList } from '../rooms';
 export class RoomsListComponent implements OnInit {
 
   // Make this class-property as a valid attribute of the "hinv-rooms-list" HTML tag
-  @Input() rooms: RoomList[] = [];
+  @Input()
+  rooms: RoomList[] = [];
+
+  @Output()
+  roomSelected = new EventEmitter<RoomList>();
 
   constructor() { }
 
   ngOnInit(): void { }
+
+  selectRoom(room: RoomList) {
+    // console.log("Clicked!");
+    this.roomSelected.emit(room);
+  }
 
 }

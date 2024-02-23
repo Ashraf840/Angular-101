@@ -83,4 +83,9 @@ export class RoomsComponent implements OnInit {
     this.hideRooms = !this.hideRooms; // Assigns the opposite value each time this method gets invoked
   }
 
+  selectRoom(room: RoomList) {
+    console.log("Emitted from parent class!");
+    console.log(room);
+  }
+
 }
