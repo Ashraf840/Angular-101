@@ -1,0 +1,32 @@
+<h3>Total Room List</h3>
+<table>
+    <tr>
+        <th>Index</th>
+        <th>Even/Odd</th>
+        <th>Room ID</th>
+        <th>Room Type</th>
+        <th>Amenities</th>
+        <th>Price</th>
+        <th>Picture</th>
+        <th>Checkin</th>
+        <th>Checkout</th>
+    </tr>
+    <!-- Track even/odd rows; as well as index numbers -->
+    <!-- Using of "ngClass" to toggle html attr-class conditionally -->
+    <tr [ngClass]="e? 'even':'odd'" *ngFor="let room of rooms; let e=even; let o=odd; let i=index">
+        <td>{{ i+1 }}</td>
+        <td>{{ e ? "Even" : "Odd" }}</td>
+        <td>{{ room.id }}</td>
+        <td>{{ room.roomType | uppercase }}</td>
+        <!-- Not adding the comma (,) after the last amenity -->
+        <td>
+            <span *ngFor="let amenities of room.amenities; last as last">
+                <b>{{ amenities }}<span *ngIf="!last">,&nbsp;</span></b>
+            </span>
+        </td>
+        <td>{{ room.price | currency: 'BDT' }}</td>
+        <td>{{ room.picture }}</td>
+        <td>{{ room.checkinTime | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ room.checkoutTime | date: 'dd-MM-yyyy' }}</td>
+    </tr>
+</table>
