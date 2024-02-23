@@ -22,6 +22,8 @@ export class RoomsComponent implements OnInit {
   showRoomListJson = false; // Checking JsonPipe (Pipes)
   roomList: RoomList[] = [];
 
+  selectedRoom!: RoomList;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -86,6 +88,7 @@ export class RoomsComponent implements OnInit {
   selectRoom(room: RoomList) {
     console.log("Emitted from parent class!");
     console.log(room);
+    this.selectedRoom = room;
   }
 
 }
