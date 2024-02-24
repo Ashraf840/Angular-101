@@ -91,4 +91,21 @@ export class RoomsComponent implements OnInit {
     this.selectedRoom = room;
   }
 
+  addRoom() {
+    let room = {
+      "id": "65d58f00c3ceb1c23eqpw3de",
+      "roomType": "Suite",
+      "amenities": [
+        "Slippers",
+        "Beer",
+        "Desktop PC"
+      ],
+      "price": 900,
+      "picture": "https://www.istockphoto.com/photo/hotel-room-gm183360854-15135140",
+      "checkinTime": "2015-12-04T23:58:19.729Z",
+      "checkoutTime": "2012-11-24T02:00:41.833Z"
+    };
+    // this.roomList.push(room); // Mutates the "roomList" array, which will not effect the child component showing this array in a tabular formatl, since "OnPush" change detection is added
+    this.roomList = [...this.roomList, room]; // Since, it's now required to pass a new instance of the property (roomList), a new instance is created this way
+  }
 }
