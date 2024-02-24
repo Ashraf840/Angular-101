@@ -39,7 +39,7 @@
     <!-- Creates a valid attribute "rooms" using "@Input()" decorator in child component; thus this HTML tag is able to add this here -->
     <!-- Get any data emitted from the child component using "@Output" decorator defined inside the child component -->
     <!-- Any event received from a child component should always be accessed using "$event" -->
-    <hinv-rooms-list [rooms]="roomList" (roomSelected)="selectRoom($event)"></hinv-rooms-list>
+    <hinv-rooms-list [rooms]="roomList" [title]="tableTitle" (roomSelected)="selectRoom($event)"></hinv-rooms-list>
 </div>
 
 <!-- Pipes: JsonPipe; Aid to debugging purpose only -->
