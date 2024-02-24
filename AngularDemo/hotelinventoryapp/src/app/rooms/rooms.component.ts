@@ -23,6 +23,7 @@ export class RoomsComponent implements OnInit {
   roomList: RoomList[] = [];
 
   selectedRoom!: RoomList;
+  tableTitle = "Rooms List";
 
   constructor() { }
 
@@ -83,6 +84,7 @@ export class RoomsComponent implements OnInit {
 
   toggle() {
     this.hideRooms = !this.hideRooms; // Assigns the opposite value each time this method gets invoked
+    this.tableTitle = this.tableTitle.toUpperCase();
   }
 
   selectRoom(room: RoomList) {
