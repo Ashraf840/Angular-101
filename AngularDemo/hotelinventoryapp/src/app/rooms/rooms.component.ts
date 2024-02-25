@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Room, RoomList } from './rooms'
+import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Room, RoomList } from './rooms';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'hinv-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   hotelName = "Hilton Hotel";
   numOfRooms = 10;
@@ -25,9 +26,16 @@ export class RoomsComponent implements OnInit {
   selectedRoom!: RoomList;
   tableTitle = "Rooms List";
 
+  @ViewChild(HeaderComponent)
+  header!: HeaderComponent; // Instantiate component of the same hierarchy
+
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log("HeaderComponent (ngOnInit):", this.header); // Output: undefined; since explicitly not defining "static=true", which indicates, that the dev of the component is unsure whether there is any asynchronous codes on that component
+    // NB: This is safe to acces in the "AfterViewInit" lifecycle hook of this component.
+
     this.roomList = [
       {
         "id": "65d58f008a4ac953b95825a7",
@@ -80,6 +88,20 @@ export class RoomsComponent implements OnInit {
         "checkoutTime": "2013-12-27T04:42:09.715Z"
       },
     ];
+  }
+
+  ngAfterViewInit() {
+    // Pre-requisite to access the properties of another component even after invoking from inside the "ngAfterViewInit()" hook?
+    // - Require to invoke the "HeadComponent's selector tag "hinv-header" should be defined in this RoomComponent's HTML template.
+    // The properties with the '@ViewChild()" decorator can safely be accessed in this inteface (Mostly helpful for the "@ViewChild()" decorators without "static=true" defined explicitly).
+    console.log("HeaderComponent (ngAfterViewInit):", this.header);
+    // this.header.title = "Rooms View - Header Title";  // Throws an error "ExpressionChangedAfterItHasBeenCheckedError" which can be ignored in the development mode. 
+    // Thus make modification of properties of fetched component should be made inside the "ngAfterViewchecked" lifecycle hook.
+  }
+
+  ngAfterViewChecked() {
+    this.header.title = "Rooms View - Header Title";  // Still I'll get the error, but it's ok in dev mode, not ok in production mode.
+    // Error: ExpressionChangedAfterItHasBeenCheckedError
   }
 
   toggle() {

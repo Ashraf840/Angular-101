@@ -1,4 +1,15 @@
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnChanges,
+  SimpleChanges,
+  // SimpleChange, // DOn't know this yet?
+  // DoCheck  // Very costly, not using it
+} from '@angular/core';
 import { RoomList } from '../rooms';
 
 @Component({
@@ -9,7 +20,9 @@ import { RoomList } from '../rooms';
   // Anything happends in the parent component will not take effect of onChange in this component.
   // "OnChanges" lifecycle hook can only be applied if the component contains "@Input()" property & that get new instance of the property. 
 })
-export class RoomsListComponent implements OnInit, OnChanges {
+export class RoomsListComponent implements OnInit, OnChanges
+// , DoCheck 
+{
 
   // Make this class-property as a valid attribute of the "hinv-rooms-list" HTML tag
   @Input()
@@ -22,6 +35,13 @@ export class RoomsListComponent implements OnInit, OnChanges {
   roomSelected = new EventEmitter<RoomList>();
 
   constructor() { }
+
+  // NB: Very expensive lifecycle hook, listens to any kind of changes throughout the entire application.
+  // Thus it's recommended to avoid using this hook
+  // ngDoCheck(): void {
+  //   console.log("'ngDoCheck' lifecycle method is called!");
+  //   // throw new Error('Method not implemented.');
+  // }
 
   ngOnChanges(changes: SimpleChanges): void {
     // throw new Error('Method not implemented.');
