@@ -1,8 +1,11 @@
 <h1>Hello World</h1>
 
+<!-- Propagate the div-template using "@ViewChild()", "ElementRef" & "ngAfterViewInit()" lifecycle hook -->
+<div #name></div>
+
 <!-- Demonstration of "ngSwitch": if the user-role is "Admin", only then the rooms-component will be displayed -->
 <!-- Bu using "ngSwitchCase" the view-components can be toggled -->
-<div [ngSwitch]="role">
+<!-- <div [ngSwitch]="role">
     <div *ngSwitchCase="'User'">
         Welcome User!
     </div>
@@ -12,4 +15,9 @@
     <div *ngSwitchDefault>
         You are not authorized to view this page!
     </div>
-</div>
+</div> -->
+
+
+<!-- Load "Rooms" component dynamically using "@ViewChild()", "ViewContainerRef" & "ngAfterViewInit()" lifecycle hook
+    ; "#" used as prefix is a template reference -->
+<ng-template #user></ng-template>

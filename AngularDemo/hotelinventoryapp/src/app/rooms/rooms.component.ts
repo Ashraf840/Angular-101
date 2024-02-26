@@ -26,6 +26,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   selectedRoom!: RoomList;
   tableTitle = "Rooms List";
 
+  // @ViewChild(HeaderComponent, {'static': true})  // Only use static=true if we're sure no asynchronous code is written inside that component. That time we can event access this component inside the "ngOnInit()" lifecycle hook.
   @ViewChild(HeaderComponent)
   header!: HeaderComponent; // Instantiate component of the same hierarchy
 
