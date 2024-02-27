@@ -7,6 +7,7 @@ import {
   ChangeDetectionStrategy,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
   // SimpleChange, // DOn't know this yet?
   // DoCheck  // Very costly, not using it
 } from '@angular/core';
@@ -20,7 +21,7 @@ import { RoomList } from '../rooms';
   // Anything happends in the parent component will not take effect of onChange in this component.
   // "OnChanges" lifecycle hook can only be applied if the component contains "@Input()" property & that get new instance of the property. 
 })
-export class RoomsListComponent implements OnInit, OnChanges
+export class RoomsListComponent implements OnInit, OnChanges, OnDestroy
 // , DoCheck 
 {
 
@@ -56,6 +57,10 @@ export class RoomsListComponent implements OnInit, OnChanges
   selectRoom(room: RoomList) {
     // console.log("Clicked!");
     this.roomSelected.emit(room);
+  }
+
+  ngOnDestroy(): void {
+    console.log("Ondestroy lifecycle hook is called!");
   }
 
 }

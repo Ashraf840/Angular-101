@@ -34,6 +34,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   selectedRoom!: RoomList;
   tableTitle = "Rooms List";
 
+  hideRoomList = false;
+
   // @ViewChild(HeaderComponent, {'static': true})  // Only use static=true if we're sure no asynchronous code is written inside that component. That time we can event access this component inside the "ngOnInit()" lifecycle hook.
   @ViewChild(HeaderComponent)
   header!: HeaderComponent; // Instantiate component of the same hierarchy
@@ -156,4 +158,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     // this.roomList.push(room); // Mutates the "roomList" array, which will not effect the child component showing this array in a tabular formatl, since "OnPush" change detection is added
     this.roomList = [...this.roomList, room]; // Since, it's now required to pass a new instance of the property (roomList), a new instance is created this way
   }
+
+  hideRoomList_handler() {
+    this.hideRoomList = !this.hideRoomList;
+  }
+
 }
