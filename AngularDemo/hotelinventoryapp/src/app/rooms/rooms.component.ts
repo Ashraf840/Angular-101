@@ -1,4 +1,12 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 
@@ -29,6 +37,11 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   // @ViewChild(HeaderComponent, {'static': true})  // Only use static=true if we're sure no asynchronous code is written inside that component. That time we can event access this component inside the "ngOnInit()" lifecycle hook.
   @ViewChild(HeaderComponent)
   header!: HeaderComponent; // Instantiate component of the same hierarchy
+
+  // Access all the instances of "HeaderComponent" using @ViewChildren() decorator
+  // "static" property is by default false & cannot be altered. Thus the array of component-instances can be accessed only from "ngAfterViewInit()" lifecycle hook.
+  @ViewChildren(HeaderComponent)
+  headerChildren!: QueryList<HeaderComponent>;
 
   constructor() { }
 
@@ -98,11 +111,21 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log("HeaderComponent (ngAfterViewInit):", this.header);
     // this.header.title = "Rooms View - Header Title";  // Throws an error "ExpressionChangedAfterItHasBeenCheckedError" which can be ignored in the development mode. 
     // Thus make modification of properties of fetched component should be made inside the "ngAfterViewchecked" lifecycle hook.
+
+    console.log("Array of same instances (HeaderComponent):", this.headerChildren);
+    console.log("Header instance (last)", this.headerChildren.last)
+    console.log("Header instance (get 2nd instance):", this.headerChildren.get(1));
   }
 
   ngAfterViewChecked() {
-    this.header.title = "Rooms View - Header Title";  // Still I'll get the error, but it's ok in dev mode, not ok in production mode.
+    this.header.title = "Rooms View - Header Title (First instance - Grabbed by @ViewChild)";  // Still I'll get the error, but it's ok in dev mode, not ok in production mode.
     // Error: ExpressionChangedAfterItHasBeenCheckedError
+
+    // TODO: Modify the 2nd instance of the header component's title
+
+
+    // Change the last instance of HeaderComponent's title
+    this.headerChildren.last.title = "Rooms View - Header (Last instance - Grabbed by @ViewChildren)";
   }
 
   toggle() {
