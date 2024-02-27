@@ -1,0 +1,9 @@
+<!-- Demonstrate "Content Projection"
+    ; Can control the oder of loading components
+    ; Such as: Load "employee" component, "ng-content" & then "dummy-content" component
+    ; The main ordering of component loading is defined here
+    ; But these components required to be defined inside the main app-component's "hinv-container" tag -->
+
+<ng-content select="hinv-employee"></ng-content>
+<ng-content></ng-content>
+<ng-content select="hinv-dummy-content"></ng-content>

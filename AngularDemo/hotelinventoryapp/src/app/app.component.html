@@ -1,5 +1,16 @@
 <h1>Hello World</h1>
 
+<!-- Directly change the content inside here
+    ; The order here won't take place since it's defined inside the template of "container" component
+    : Working with "ngAfterContentInit" lifecycle hook. -->
+<hinv-container>
+    <!-- Whatever is loaded inside this container is the content -->
+    <hinv-employee></hinv-employee>
+    <hinv-dummy-content></hinv-dummy-content>
+    <!-- Other devs will write codes here & whatever doesn't match the html tags (eg. hinv-employee or hinv-dummy-content) with the ng-content's select property's value from the 'container' component will be fall inside the ng-content with no "select" property -->
+    <p>This is from ng-content.</p>
+</hinv-container>
+
 <!-- Propagate the div-template using "@ViewChild()", "ElementRef" & "ngAfterViewInit()" lifecycle hook -->
 <div #name></div>
 
@@ -19,5 +30,6 @@
 
 
 <!-- Load "Rooms" component dynamically using "@ViewChild()", "ViewContainerRef" & "ngAfterViewInit()" lifecycle hook
-    ; "#" used as prefix is a template reference -->
+    ; "#" used as prefix is a template reference.
+    RoomComponent is propagated here. -->
 <ng-template #user></ng-template>
