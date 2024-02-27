@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
+
 
 @Component({
   selector: 'hinv-root',  // Changed inside the angular.json file's prefix property
@@ -7,6 +8,7 @@ import { RoomsComponent } from './rooms/rooms.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
+
   title = 'hotelinventoryapp';
 
   role = 'Admin'; // Used in toggling the view-component in "app.component.html" file
@@ -33,4 +35,5 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Modify the "numOfRooms" property from here a demo 
     componentRef.instance.numOfRooms = 50;
   }
+
 }
