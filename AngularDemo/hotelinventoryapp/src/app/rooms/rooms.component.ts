@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
+import { RoomService } from './services/room.service';
 
 @Component({
   selector: 'hinv-rooms',
@@ -45,65 +46,16 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChildren(HeaderComponent)
   headerChildren!: QueryList<HeaderComponent>;
 
-  constructor() { }
+  constructor(private roomService: RoomService) { }
 
   ngOnInit(): void {
 
     console.log("HeaderComponent (ngOnInit):", this.header); // Output: undefined; since explicitly not defining "static=true", which indicates, that the dev of the component is unsure whether there is any asynchronous codes on that component
-    // NB: This is safe to acces in the "AfterViewInit" lifecycle hook of this component.
+    // NB: This is safe to access the "header" component-variable in the "AfterViewInit" lifecycle hook of this component.
 
-    this.roomList = [
-      {
-        "id": "65d58f008a4ac953b95825a7",
-        "roomType": "Single",
-        "amenities": [
-          "Charging Station",
-          "Beer",
-          "Snacks Basket"
-        ],
-        "price": 600,
-        "picture": "https://www.istockphoto.com/photo/luxurious-modern-bedroom-with-blank-boxes-for-your-design-gm97084449-12119394",
-        "checkinTime": "2011-09-30T12:47:48.797Z",
-        "checkoutTime": "2010-07-25T18:43:16.676Z"
-      },
-      {
-        "id": "65d58f00c3ceb1c23ea5d1cb",
-        "roomType": "Suite",
-        "amenities": [
-          "Slippers",
-          "Beer"
-        ],
-        "price": 800,
-        "picture": "https://www.istockphoto.com/photo/hotel-room-gm183360854-15135140",
-        "checkinTime": "2015-12-04T23:58:19.729Z",
-        "checkoutTime": "2012-11-24T02:00:41.833Z"
-      },
-      {
-        "id": "65d58f00e868d4b0c2b455c2",
-        "roomType": "Suite",
-        "amenities": [
-          "Slippers",
-          "Beer",
-          "Live Kitchen"
-        ],
-        "price": 1500,
-        "picture": "https://www.istockphoto.com/photo/comfortable-room-gm133983218-18290760",
-        "checkinTime": "2011-07-08T11:23:57.301Z",
-        "checkoutTime": "2011-03-29T23:20:38.194Z"
-      },
-      {
-        "id": "65d58f00a3e3bdb69781f489",
-        "roomType": "Double",
-        "amenities": [
-          "Toiletries",
-          "Complementary Breakfast"
-        ],
-        "price": 1200,
-        "picture": "https://www.istockphoto.com/photo/comfortable-room-gm133983218-18290760",
-        "checkinTime": "2014-12-26T13:07:47.194Z",
-        "checkoutTime": "2013-12-27T04:42:09.715Z"
-      },
-    ];
+    // Assign the room-service function to get all data into a variable here.
+    this.roomList = this.roomService.getRooms();
+
   }
 
   ngAfterViewInit() {
