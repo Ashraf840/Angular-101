@@ -1,6 +1,6 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
-
+import { LocalStorageToken } from './localstorage.token';
 
 @Component({
   selector: 'hinv-root',  // Changed inside the angular.json file's prefix property
@@ -20,7 +20,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('user', { read: ViewContainerRef })
   vcr!: ViewContainerRef; // Using "ViewContainerRef" since it's referencing a reuseable template (ng-template)
 
-  constructor() { }
+  // Recommended: Use any kind of Web APIs as "value providers" & inject them to any component
+  constructor(@Inject(LocalStorageToken) private localStorage: Storage) { }
 
   ngOnInit(): void {
     console.log("#name div:", this.name);
@@ -34,6 +35,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Change a property of a component dynamically
     // Modify the "numOfRooms" property from here a demo 
     componentRef.instance.numOfRooms = 50;
+
+    // Set a local localStorage value; the "localStorage" instance is injected & provided as a "Value Provider" which is a part of "DI Providers".
+    this.localStorage.setItem("Hotel Name", "Hilton Hotel");
   }
 
 }
