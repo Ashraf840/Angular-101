@@ -5,7 +5,8 @@ import { RoomService } from '../rooms/services/room.service';
   selector: 'hinv-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
-  providers: [RoomService]
+  providers: [RoomService]  // Used in demonstrating resolution modifiers (before started learning DI);
+  // TODO: Learning the "resolution modifiers": @self(),  
 })
 export class EmployeeComponent implements OnInit {
   empName: string = "John";
