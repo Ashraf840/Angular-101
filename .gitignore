@@ -1,2 +1,7 @@
 Resource Links.txt
 node_modules
+env
+.env
+**/__pycache__/
+db.sqlite3
+**/migrations/[0-9]*_*.py
