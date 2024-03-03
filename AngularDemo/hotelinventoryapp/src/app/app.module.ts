@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { DummyContentComponent } from './dummy-content/dummy-content.component';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_CONFIG, APP_SERVICE_CONFIG } from '../app/AppConfig/appconfig.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,15 @@ import { DummyContentComponent } from './dummy-content/dummy-content.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_SERVICE_CONFIG,
+      useValue: APP_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

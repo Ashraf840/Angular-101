@@ -53,8 +53,16 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log("HeaderComponent (ngOnInit):", this.header); // Output: undefined; since explicitly not defining "static=true", which indicates, that the dev of the component is unsure whether there is any asynchronous codes on that component
     // NB: This is safe to access the "header" component-variable in the "AfterViewInit" lifecycle hook of this component.
 
-    // Assign the room-service function to get all data into a variable here.
-    this.roomList = this.roomService.getRooms();
+    // Assign the room-service function to get all data into a variable here. Making of http request to fetch the data from django backend, since it's an asynchronous call-tp-api, we need to "subscribe" to that service-method rather than directlyt assing the m
+    // this.roomList = this.roomService.getRooms();
+
+    console.log(this.roomService.getRooms());
+
+    // Assing subscribe() method to that roomService
+    this.roomService.getRooms().subscribe(rooms => {
+      this.roomList = rooms;  // if we don't define the datatype (in generic) while using the http.get() method, the assignment here will throw an error mentioning the roomList is of type list() & cannot assign to data of type object
+      console.log("RoomList:", rooms);
+    });
 
   }
 
