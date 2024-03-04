@@ -52,7 +52,7 @@
     <hinv-rooms-list [rooms]="roomList" [title]="tableTitle" (roomSelected)="selectRoom($event)"></hinv-rooms-list>
 </div>
 
-<!-- Pipes: JsonPipe; Aid to debugging purpose only -->
+<!-- Pipes: JsonPipe; Aid to debugging purpose only; Require to manually change the boolean value of "showRoomListJson" in component.ts file -->
 <div *ngIf="showRoomListJson">
     <h3>Room list (json-response)</h3>
     <p>{{ roomList | json }}</p>
