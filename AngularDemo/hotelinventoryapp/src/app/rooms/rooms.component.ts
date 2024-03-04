@@ -10,6 +10,7 @@ import {
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomService } from './services/room.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'hinv-rooms',
@@ -37,6 +38,14 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   hideRoomList = false;
 
+  // Stream of data using 'observable' from RxJS
+  stream = new Observable<string>(observer => {
+    observer.next('user 1');
+    observer.next('user 2');
+    observer.next('user 3');
+    observer.complete();
+  });
+
   // @ViewChild(HeaderComponent, {'static': true})  // Only use static=true if we're sure no asynchronous code is written inside that component. That time we can event access this component inside the "ngOnInit()" lifecycle hook.
   @ViewChild(HeaderComponent)
   header!: HeaderComponent; // Instantiate component of the same hierarchy
@@ -49,6 +58,16 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   constructor(private roomService: RoomService) { }
 
   ngOnInit(): void {
+
+    // (Approach-2)Subscribing to the observable
+    this.stream.subscribe({
+      next: (data) => console.log(data),
+      complete: () => console.log("complete"),
+      error: (err) => console.log("errro"),
+    });
+
+    // (Approach-1) Subscribing to the stream of data observable
+    // this.stream.subscribe(data => console.log(data));
 
     console.log("HeaderComponent (ngOnInit):", this.header); // Output: undefined; since explicitly not defining "static=true", which indicates, that the dev of the component is unsure whether there is any asynchronous codes on that component
     // NB: This is safe to access the "header" component-variable in the "AfterViewInit" lifecycle hook of this component.
