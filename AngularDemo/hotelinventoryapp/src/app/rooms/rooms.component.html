@@ -81,4 +81,8 @@
         Rooms List (using Async pipe)
     </h1>
     {{ rooms$ | async | json }}
+
+    <h2>
+        {{ getError$ | async }}
+    </h2>
 </div>

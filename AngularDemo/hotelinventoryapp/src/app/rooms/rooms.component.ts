@@ -11,7 +11,7 @@ import {
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomService } from './services/room.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -62,8 +62,21 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   // Assign a subscription object to a subscriber, which later will be unsubscribed in this component's ngOnDestroy lifecycle hook.
   subscription !: Subscription;
 
+  // Create an error stream to show the error message directly to the stream, so that it can be shown in the template.
+  // Instantiate a new Subject instance.
+  error$ = new Subject<string>(); // HAVING ISSUE
+
+  getError$ = this.error$.asObservable(); // HAVING ISSUE
+
   // Directly calling the roomService property to which fetches the data from the backend
-  rooms$ = this.roomService.getRooms$;
+  // Handle error if the service faces an error.
+  rooms$ = this.roomService.getRooms$.pipe(
+    catchError((err) => {
+      console.log(err);
+      this.error$.next(err.message);  // Whenever we receives an error, we'll subscribe to that.
+      return of([]);
+    })
+  );
 
   constructor(private roomService: RoomService) { }
 
