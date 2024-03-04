@@ -11,6 +11,7 @@ import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomService } from './services/room.service';
 import { Observable } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'hinv-rooms',
@@ -46,6 +47,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     observer.complete();
   });
 
+  totalBytes = 0;
+
   // @ViewChild(HeaderComponent, {'static': true})  // Only use static=true if we're sure no asynchronous code is written inside that component. That time we can event access this component inside the "ngOnInit()" lifecycle hook.
   @ViewChild(HeaderComponent)
   header!: HeaderComponent; // Instantiate component of the same hierarchy
@@ -58,6 +61,27 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   constructor(private roomService: RoomService) { }
 
   ngOnInit(): void {
+    // Demonstration of loading bulk amount of data from the API;
+    // Show a loader on while fetching such bulk data
+    this.roomService.getPhotos().subscribe((event) => {
+      switch (event.type) {
+        case HttpEventType.Sent: {
+          console.log("Request has been sent");
+          break;
+        }
+        case HttpEventType.ResponseHeader: {
+          console.log("Request success");
+          break;
+        }
+        case HttpEventType.DownloadProgress: {
+          this.totalBytes += event.loaded;
+          break
+        }
+        case HttpEventType.Response: {
+          console.log(event.body);
+        }
+      }
+    });
 
     // (Approach-2)Subscribing to the observable
     this.stream.subscribe({
@@ -104,7 +128,6 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     // TODO: Modify the 2nd instance of the header component's title
 
-
     // Change the last instance of HeaderComponent's title
     this.headerChildren.last.title = "Rooms View - Header (Last instance - Grabbed by @ViewChildren)";
   }
@@ -134,8 +157,16 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
       "checkinTime": "2015-12-04T23:58:19.729Z",
       "checkoutTime": "2012-11-24T02:00:41.833Z"
     };
+
     // this.roomList.push(room); // Mutates the "roomList" array, which will not effect the child component showing this array in a tabular formatl, since "OnPush" change detection is added
-    this.roomList = [...this.roomList, room]; // Since, it's now required to pass a new instance of the property (roomList), a new instance is created this way
+    // this.roomList = [...this.roomList, room]; // Since, it's now required to pass a new instance of the property (roomList), a new instance is created this way
+
+    // Make a post request to craete room in the backend & show the response
+    this.roomService.addRoom(room).subscribe(data => {
+      console.log("Room list:", data);
+
+      this.roomList = data;
+    });
   }
 
   hideRoomList_handler() {

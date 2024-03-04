@@ -3,60 +3,35 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404
+from .rooms_data import room_list
 
 
 @api_view(http_method_names=["GET"])
-def roomList(request:Request):
-    room_list = [
+def get_roomList(request:Request):
+    rooms = room_list
+    return Response(data=rooms, status=status.HTTP_200_OK)
+
+
+@api_view(http_method_names=["POST"])
+def add_roomList(request:Request):
+    # print("POST id:", request.data.get('id'))
+    id = request.data.get('id')
+    roomType = request.data.get('roomType')
+    amenities = request.data.get('amenities')
+    price = request.data.get('price')
+    picture = request.data.get('picture')
+    checkinTime = request.data.get('checkinTime')
+    checkoutTime = request.data.get('checkoutTime')
+    room_list.append(
         {
-        "id": "65d58f008a4ac953b95825a7",
-        "roomType": "Single",
-        "amenities": [
-            "Charging Station",
-            "Beer",
-            "Snacks Basket"
-        ],
-        "price": 600,
-        "picture": "https://www.istockphoto.com/photo/luxurious-modern-bedroom-with-blank-boxes-for-your-design-gm97084449-12119394",
-        "checkinTime": "2011-09-30T12:47:48.797Z",
-        "checkoutTime": "2010-07-25T18:43:16.676Z"
-        },
-        {
-        "id": "65d58f00c3ceb1c23ea5d1cb",
-        "roomType": "Suite",
-        "amenities": [
-            "Slippers",
-            "Beer"
-        ],
-        "price": 800,
-        "picture": "https://www.istockphoto.com/photo/hotel-room-gm183360854-15135140",
-        "checkinTime": "2015-12-04T23:58:19.729Z",
-        "checkoutTime": "2012-11-24T02:00:41.833Z"
-        },
-        {
-        "id": "65d58f00e868d4b0c2b455c2",
-        "roomType": "Suite",
-        "amenities": [
-            "Slippers",
-            "Beer",
-            "Live Kitchen"
-        ],
-        "price": 1500,
-        "picture": "https://www.istockphoto.com/photo/comfortable-room-gm133983218-18290760",
-        "checkinTime": "2011-07-08T11:23:57.301Z",
-        "checkoutTime": "2011-03-29T23:20:38.194Z"
-        },
-        {
-        "id": "65d58f00a3e3bdb69781f489",
-        "roomType": "Double",
-        "amenities": [
-            "Toiletries",
-            "Complementary Breakfast"
-        ],
-        "price": 1200,
-        "picture": "https://www.istockphoto.com/photo/comfortable-room-gm133983218-18290760",
-        "checkinTime": "2014-12-26T13:07:47.194Z",
-        "checkoutTime": "2013-12-27T04:42:09.715Z"
-        },
-    ]
-    return Response(data=room_list, status=status.HTTP_200_OK)
+            "id": f"{id}",
+            "roomType": f"{roomType}",
+            "amenities": f"{amenities}",
+            "price": price,
+            "picture": f"{picture}",
+            "checkinTime": f"{checkinTime}",
+            "checkoutTime": f"{checkoutTime}"
+        }
+    )
+    print(request.data)
+    return Response(data=room_list, status=status.HTTP_201_CREATED)

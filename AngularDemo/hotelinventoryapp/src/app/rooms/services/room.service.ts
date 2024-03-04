@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
-import { RoomList } from '../rooms';
+import { Room, RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'  //It helps to initialize a single instance of the class throughout the application
@@ -79,4 +79,19 @@ export class RoomService {
     return this.http.get<RoomList[]>(roomListURL);   // define the datatype of Roomlist[] as in generic manner, otherwise it'll throw an error while using this service to another component & want to assign it's fetched value to a variable there.
   }
 
+  addRoom(room: RoomList) {
+    let roomCreateURL = "http://127.0.0.1:8080/hotel/room-create/";
+    // Show all the rooms list, after adding the record to backend.
+    return this.http.post<RoomList[]>(roomCreateURL, room);
+  }
+
+  // Demonstration of loading bulk amount of data from the API
+  getPhotos() {
+    const request = new HttpRequest(
+      'GET',
+      'https://jsonplaceholder.typicode.com/photos',
+      { reportProgress: true }
+    );
+    return this.http.request(request);
+  }
 }
