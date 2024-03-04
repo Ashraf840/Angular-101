@@ -7,7 +7,8 @@
     <!-- Whatever is loaded inside this container is the content -->
     <hinv-employee></hinv-employee>
     <hinv-dummy-content></hinv-dummy-content>
-    <!-- Other devs will write codes here & whatever doesn't match the html tags (eg. hinv-employee or hinv-dummy-content) with the ng-content's select property's value from the 'container' component will be fall inside the ng-content with no "select" property -->
+    <!-- Other devs will write codes here & whatever doesn't match the html tags (eg. hinv-employee or hinv-dummy-content) with the ng-content's select property's value from the 'container' component will fall inside the ng-content with no "select" property of that "container" component's html template -->
+    <!-- The following <p> tag will fall inside the plain <ng-content> -->
     <p>This is from ng-content.</p>
 </hinv-container>
 

@@ -32,8 +32,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Loaded a component dynamically
     const componentRef = this.vcr.createComponent(RoomsComponent);
-    // Change a property of a component dynamically
-    // Modify the "numOfRooms" property from here a demo 
+    const componentRef2 = this.vcr.createComponent(RoomsComponent);
+    // Access & change the property of a component dynamically
+    // Modify the "numOfRooms" property from here a demo
     componentRef.instance.numOfRooms = 50;
 
     // Set a local localStorage value; the "localStorage" instance is injected & provided as a "Value Provider" which is a part of "DI Providers".

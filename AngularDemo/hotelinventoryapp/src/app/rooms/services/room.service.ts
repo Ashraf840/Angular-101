@@ -3,12 +3,14 @@ import { Room, RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'  //It helps to initialize a single instance of the class throughout the application
 })
 export class RoomService {
 
+  // Getting the roomList from mock-backend-server
   // roomList: RoomList[] = [
   //   {
   //     "id": "65d58f008a4ac953b95825a7",
@@ -61,6 +63,17 @@ export class RoomService {
   //     "checkoutTime": "2013-12-27T04:42:09.715Z"
   //   },
   // ];
+
+  // ShareReplay Operator in RxJS: Converting multicasted Observable into a unicast Observable by caching it's emitted values
+  // Note: When there are multiple subscribers to an Observable.
+  // "nth" instance of that Observable by defining integer index as arg in "ShareReplay()"
+  // For demonstrating the caching of emitted values, I've duplicated the rooms.component so that the fetching of room-list-data gets called twice & then use ShareReplay to mitigate the number of callings (by caching).
+  // Note: We cannot modify a stream of data after it's received, it can only be nodified only within a stream or before it is subscribed.  
+  // Directly calling the get-room-list-api while using the pipe method to integrate ShareReplay() operator.
+  // The trailing dollar denotes that the variable is a stream.
+  getRooms$ = this.http.get<RoomList[]>('http://127.0.0.1:8080/hotel/room-list/').pipe(
+    shareReplay(1) // Replay the last one record that we've received
+  );
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig,
     private http: HttpClient) {
