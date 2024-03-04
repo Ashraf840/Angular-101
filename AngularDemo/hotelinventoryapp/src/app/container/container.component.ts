@@ -21,7 +21,7 @@ export class ContainerComponent implements AfterContentInit, OnInit {
   ngAfterContentInit(): void {
     console.log("Employee component (ngAfterContentInit of Container Component):", this.empc);
     // Modify a prop value of Employee Component after loading the content in parent component.
-    this.empc.empName += " (changed in ngAfterContentInit)"
+    this.empc.empName += " (Extra comment: changed in ngAfterContentInit)"
   }
 
 }
