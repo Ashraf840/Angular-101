@@ -27,7 +27,7 @@ export class RoomsListComponent implements OnInit, OnChanges, OnDestroy
 
   // Make this class-property as a valid attribute of the "hinv-rooms-list" HTML tag
   @Input()
-  rooms: RoomList[] = [];
+  rooms: RoomList[] | null = [];
 
   @Input()
   title: string = '';

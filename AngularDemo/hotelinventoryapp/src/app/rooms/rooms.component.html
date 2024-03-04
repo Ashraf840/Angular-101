@@ -45,11 +45,18 @@
     ; Demonstrate "ngOnDestroy" lifecycle hook
     ; Incorporating with *ngIf directive since it will remove the HTML elem from the DOM if the expression evaluates to false
     ; The roomlist component will be destroyed; thus the "ngOnDestroy" hook of roomlist component will caught the destroy event of this component -->
-<div *ngIf="!hideRoomList">
-    <!-- Creates a valid attribute "rooms" using "@Input()" decorator in child component; thus this HTML tag is able to add this here -->
-    <!-- Get any data emitted from the child component using "@Output" decorator defined inside the child component -->
-    <!-- Any event received from a child component should always be accessed using "$event" -->
-    <hinv-rooms-list [rooms]="roomList" [title]="tableTitle" (roomSelected)="selectRoom($event)"></hinv-rooms-list>
+<!-- <div *ngIf="!hideRoomList"> -->
+<!-- Creates a valid attribute "rooms" using "@Input()" decorator in child component; thus this HTML tag is able to add this here -->
+<!-- Get any data emitted from the child component using "@Output" decorator defined inside the child component -->
+<!-- Any event received from a child component should always be accessed using "$event" -->
+<!-- <hinv-rooms-list [rooms]="roomList" [title]="tableTitle" (roomSelected)="selectRoom($event)"></hinv-rooms-list> -->
+
+<!-- Rather than subscribing to multiple times to the observable, use a type casting of the "rooms$" property -->
+<div *ngIf="rooms$ | async as rooms">
+    <!-- Use rooms$ stream w/ async pipe; make the "rooms" property inside the room-list.component of type "RoomList[] | null", since the async pipe may also return null -->
+    <!-- <hinv-rooms-list [rooms]="rooms$ | async" [title]="tableTitle"
+        (roomSelected)="selectRoom($event)"></hinv-rooms-list> -->
+    <hinv-rooms-list [rooms]="rooms" [title]="tableTitle" (roomSelected)="selectRoom($event)"></hinv-rooms-list>
 </div>
 
 <!-- Pipes: JsonPipe; Aid to debugging purpose only; Require to manually change the boolean value of "showRoomListJson" in component.ts file -->
@@ -66,3 +73,12 @@
 <h1>
     {{ totalBytes }} loaded
 </h1>
+
+<br><br>
+
+<div>
+    <h1>
+        Rooms List (using Async pipe)
+    </h1>
+    {{ rooms$ | async | json }}
+</div>

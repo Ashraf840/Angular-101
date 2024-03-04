@@ -62,6 +62,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   // Assign a subscription object to a subscriber, which later will be unsubscribed in this component's ngOnDestroy lifecycle hook.
   subscription !: Subscription;
 
+  // Directly calling the roomService property to which fetches the data from the backend
+  rooms$ = this.roomService.getRooms$;
+
   constructor(private roomService: RoomService) { }
 
   ngOnInit(): void {
@@ -105,14 +108,14 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
     // console.log(this.roomService.getRooms());
 
-    // Subscribing to the "getRooms()" method of the "roomsService".
-    // Rather than using the plain method w/o any ShareReplay() operator, I've used the customized "getRooms$" variable which contains the fetching of rooms-list w/ pipe method to where the ShareReplaye operator is used.
-    // Thus it'll make only one call in the get-rooms API, can inspect that in the network of the browser debug.
-    // this.roomService.getRooms().subscribe(rooms => {
-    this.subscription = this.roomService.getRooms$.subscribe(rooms => {
-      this.roomList = rooms;  // if we don't define the datatype (in generic) while using the http.get() method, the assignment here will throw an error mentioning the roomList is of type list() & cannot assign to data of type object
-      console.log("RoomList:", rooms);
-    });
+    // // Subscribing to the "getRooms()" method of the "roomsService".
+    // // Rather than using the plain method w/o any ShareReplay() operator, I've used the customized "getRooms$" variable which contains the fetching of rooms-list w/ pipe method to where the ShareReplaye operator is used.
+    // // Thus it'll make only one call in the get-rooms API, can inspect that in the network of the browser debug.
+    // // this.roomService.getRooms().subscribe(rooms => {
+    // this.subscription = this.roomService.getRooms$.subscribe(rooms => {
+    //   this.roomList = rooms;  // if we don't define the datatype (in generic) while using the http.get() method, the assignment here will throw an error mentioning the roomList is of type list() & cannot assign to data of type object
+    //   console.log("RoomList:", rooms);
+    // }); // Instead of manually subscribing, just call the getRooms$ of roomService as the prop of this class.
 
   }
 
