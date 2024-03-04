@@ -64,9 +64,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
   // Create an error stream to show the error message directly to the stream, so that it can be shown in the template.
   // Instantiate a new Subject instance.
-  error$ = new Subject<string>(); // HAVING ISSUE
+  error$ = new Subject<string>();
 
-  getError$ = this.error$.asObservable(); // HAVING ISSUE
+  getError$ = this.error$.asObservable();
 
   // Directly calling the roomService property to which fetches the data from the backend
   // Handle error if the service faces an error.
