@@ -2,6 +2,7 @@ import {
   AfterViewChecked,
   AfterViewInit,
   Component,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChild,
@@ -10,7 +11,7 @@ import {
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomService } from './services/room.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -18,7 +19,7 @@ import { HttpEventType } from '@angular/common/http';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
 
   hotelName = "Hilton Hotel";
   numOfRooms = 10;
@@ -57,6 +58,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   // "static" property is by default false & cannot be altered. Thus the array of component-instances can be accessed only from "ngAfterViewInit()" lifecycle hook.
   @ViewChildren(HeaderComponent)
   headerChildren!: QueryList<HeaderComponent>;
+
+  // Assign a subscription object to a subscriber, which later will be unsubscribed in this component's ngOnDestroy lifecycle hook.
+  subscription !: Subscription;
 
   constructor(private roomService: RoomService) { }
 
@@ -105,7 +109,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     // Rather than using the plain method w/o any ShareReplay() operator, I've used the customized "getRooms$" variable which contains the fetching of rooms-list w/ pipe method to where the ShareReplaye operator is used.
     // Thus it'll make only one call in the get-rooms API, can inspect that in the network of the browser debug.
     // this.roomService.getRooms().subscribe(rooms => {
-    this.roomService.getRooms$.subscribe(rooms => {
+    this.subscription = this.roomService.getRooms$.subscribe(rooms => {
       this.roomList = rooms;  // if we don't define the datatype (in generic) while using the http.get() method, the assignment here will throw an error mentioning the roomList is of type list() & cannot assign to data of type object
       console.log("RoomList:", rooms);
     });
@@ -174,6 +178,13 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   hideRoomList_handler() {
     this.hideRoomList = !this.hideRoomList;
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe if there is any available subscription exist in this component while destroying this component.
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }
