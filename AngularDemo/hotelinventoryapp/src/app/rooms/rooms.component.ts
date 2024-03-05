@@ -11,7 +11,7 @@ import {
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomService } from './services/room.service';
-import { Observable, Subject, Subscription, catchError, of } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -76,6 +76,11 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
       this.error$.next(err.message);  // Whenever we receives an error, we'll subscribe to that.
       return of([]);
     })
+  );
+
+  // Demonstrate the "map" operator: It can modify the data within the stream.
+  roomsCount$ = this.roomService.getRooms$.pipe(
+    map((room) => room.length),
   );
 
   constructor(private roomService: RoomService) { }
