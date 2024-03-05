@@ -90,7 +90,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
 ]
 
-# Example of additional CORS settings
+# Example of additional CORS settings [The following header-keys are allowed from the client machine]
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',

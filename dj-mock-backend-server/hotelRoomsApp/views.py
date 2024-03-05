@@ -8,6 +8,7 @@ from .rooms_data import room_list
 
 @api_view(http_method_names=["GET"])
 def get_roomList(request:Request):
+    print(request.META) # Access "headers" information
     rooms = room_list
     return Response(data=rooms, status=status.HTTP_200_OK)
 
