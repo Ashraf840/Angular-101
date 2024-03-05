@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Room, RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { shareReplay } from 'rxjs';
 
 @Injectable({
@@ -10,7 +10,60 @@ import { shareReplay } from 'rxjs';
 })
 export class RoomService {
 
-  // Getting the roomList from mock-backend-server
+  // Getting the roomList from mock-backend-server [COMMENTED OUTSIDE THE CLASS]
+
+  // Add headers to HTTP requests
+  headers = new HttpHeaders({ 'authorization': 'Bearer 12398ydsflk328' });  // "token" as a key is not allowed in the "CORS_ALLOW_HEADERS" defined in the settings.py file of the django backend, thus changed it to "authorization"
+
+  // ShareReplay Operator in RxJS: Converting multicasted Observable into a unicast Observable by caching it's emitted values
+  // Note: When there are multiple subscribers to an Observable.
+  // "nth" instance of that Observable by defining integer index as arg in "ShareReplay()"
+  // For demonstrating the caching of emitted values, I've duplicated the rooms.component so that the fetching of room-list-data gets called twice & then use ShareReplay to mitigate the number of callings (by caching).
+  // Note: We cannot modify a stream of data after it's received, it can only be nodified only within a stream or before it is subscribed.  
+  // Directly calling the get-room-list-api while using the pipe method to integrate ShareReplay() operator.
+  // The trailing dollar denotes that the variable is a stream.
+  getRooms$ = this.http.get<RoomList[]>('http://127.0.0.1:8080/hotel/room-list/', {
+    headers: this.headers
+  }).pipe(
+    shareReplay(1) // Replay the last one record that we've received
+  );
+
+  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig,
+    private http: HttpClient) {
+    console.log(config.apiEndpoint);
+
+    console.log("Room service is initialized");
+  }
+
+  getRooms() {
+    console.log("Calling the getRooms() method to fetch all the rooms from the 'room.service' file");
+
+    // return this.roomList;
+
+    // Instead of return roomList as static object, it'll be fetched from the backend-server.
+    let roomListURL = "http://127.0.0.1:8080/hotel/room-list/";
+    return this.http.get<RoomList[]>(roomListURL);   // define the datatype of Roomlist[] as in generic manner, otherwise it'll throw an error while using this service to another component & want to assign it's fetched value to a variable there.
+  }
+
+  addRoom(room: RoomList) {
+    let roomCreateURL = "http://127.0.0.1:8080/hotel/room-create/";
+    // Show all the rooms list, after adding the record to backend.
+    return this.http.post<RoomList[]>(roomCreateURL, room);
+  }
+
+  // Demonstration of loading bulk amount of data from the API
+  getPhotos() {
+    const request = new HttpRequest(
+      'GET',
+      'https://jsonplaceholder.typicode.com/photos',
+      { reportProgress: true }
+    );
+    return this.http.request(request);
+  }
+}
+
+
+/** 
   // roomList: RoomList[] = [
   //   {
   //     "id": "65d58f008a4ac953b95825a7",
@@ -63,48 +116,4 @@ export class RoomService {
   //     "checkoutTime": "2013-12-27T04:42:09.715Z"
   //   },
   // ];
-
-  // ShareReplay Operator in RxJS: Converting multicasted Observable into a unicast Observable by caching it's emitted values
-  // Note: When there are multiple subscribers to an Observable.
-  // "nth" instance of that Observable by defining integer index as arg in "ShareReplay()"
-  // For demonstrating the caching of emitted values, I've duplicated the rooms.component so that the fetching of room-list-data gets called twice & then use ShareReplay to mitigate the number of callings (by caching).
-  // Note: We cannot modify a stream of data after it's received, it can only be nodified only within a stream or before it is subscribed.  
-  // Directly calling the get-room-list-api while using the pipe method to integrate ShareReplay() operator.
-  // The trailing dollar denotes that the variable is a stream.
-  getRooms$ = this.http.get<RoomList[]>('http://127.0.0.1:8080/hotel/room-list/').pipe(
-    shareReplay(1) // Replay the last one record that we've received
-  );
-
-  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig,
-    private http: HttpClient) {
-    console.log(config.apiEndpoint);
-
-    console.log("Room service is initialized");
-  }
-
-  getRooms() {
-    console.log("Calling the getRooms() method to fetch all the rooms from the 'room.service' file");
-
-    // return this.roomList;
-
-    // Instead of return roomList as static object, it'll be fetched from the backend-server.
-    let roomListURL = "http://127.0.0.1:8080/hotel/room-list/";
-    return this.http.get<RoomList[]>(roomListURL);   // define the datatype of Roomlist[] as in generic manner, otherwise it'll throw an error while using this service to another component & want to assign it's fetched value to a variable there.
-  }
-
-  addRoom(room: RoomList) {
-    let roomCreateURL = "http://127.0.0.1:8080/hotel/room-create/";
-    // Show all the rooms list, after adding the record to backend.
-    return this.http.post<RoomList[]>(roomCreateURL, room);
-  }
-
-  // Demonstration of loading bulk amount of data from the API
-  getPhotos() {
-    const request = new HttpRequest(
-      'GET',
-      'https://jsonplaceholder.typicode.com/photos',
-      { reportProgress: true }
-    );
-    return this.http.request(request);
-  }
-}
+*/
