@@ -71,7 +71,7 @@ export class RoomService {
   // Note: We cannot modify a stream of data after it's received, it can only be nodified only within a stream or before it is subscribed.  
   // Directly calling the get-room-list-api while using the pipe method to integrate ShareReplay() operator.
   // The trailing dollar denotes that the variable is a stream.
-  getRooms$ = this.http.get<RoomList[]>('http://127.0.0.1:8080/hotel/room/').pipe(
+  getRooms$ = this.http.get<RoomList[]>('http://127.0.0.1:8080/hotel/room-list/').pipe(
     shareReplay(1) // Replay the last one record that we've received
   );
 
