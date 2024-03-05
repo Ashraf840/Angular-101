@@ -3,7 +3,8 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -14,6 +15,12 @@ export class RequestInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log("Request Interceptor:", request);
-    return next.handle(request);  // This will actually send the requests to the server from now on. (prerequisite: register this interceptor into the app.module's providers section)
+    // We cannot modify the original "request", rather we can clone it & then modify it.
+    let modRequest = request.clone({
+      headers: new HttpHeaders({
+        authorization: 'eoriuwoeiruoiuwer-updated'
+      }),
+    }); // Since "request" is a dictionary, we can directly access & modify the "headers" key-value pair in this way.
+    return next.handle(modRequest);  // This will actually send the requests to the server from now on. (prerequisite: register this interceptor into the app.module's providers section)
   }
 }

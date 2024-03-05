@@ -34,7 +34,7 @@ import { RequestInterceptor } from './request.interceptor';
       provide: APP_SERVICE_CONFIG,
       useValue: APP_CONFIG
     },
-    // HttpInterceptor
+    // HttpInterceptor; Interceptors are executed sequentially
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,

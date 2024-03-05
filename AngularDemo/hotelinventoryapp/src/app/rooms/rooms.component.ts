@@ -88,7 +88,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   ngOnInit(): void {
     // Demonstration of loading bulk amount of data from the API;
     // Show a loader on while fetching such bulk data
-    this.roomService.getPhotos().subscribe((event) => {
+    // this.roomService.getPhotos().subscribe((event) => {
+    this.roomService.getPhotos$.subscribe((event) => {
       switch (event.type) {
         case HttpEventType.Sent: {
           console.log("Request has been sent");

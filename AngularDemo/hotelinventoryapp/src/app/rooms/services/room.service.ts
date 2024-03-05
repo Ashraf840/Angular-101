@@ -13,7 +13,8 @@ export class RoomService {
   // Getting the roomList from mock-backend-server [COMMENTED OUTSIDE THE CLASS]
 
   // Add headers to HTTP requests
-  headers = new HttpHeaders({ 'authorization': 'Bearer 12398ydsflk328' });  // "token" as a key is not allowed in the "CORS_ALLOW_HEADERS" defined in the settings.py file of the django backend, thus changed it to "authorization"
+  // headers = new HttpHeaders({ 'authorization': 'Bearer 12398ydsflk328' });  // "token" as a key is not allowed in the "CORS_ALLOW_HEADERS" defined in the settings.py file of the django backend, thus changed it to "authorization"
+  // NB: Added the headers of each request in the HttpIntercaptor.
 
   // ShareReplay Operator in RxJS: Converting multicasted Observable into a unicast Observable by caching it's emitted values
   // Note: When there are multiple subscribers to an Observable.
@@ -23,9 +24,19 @@ export class RoomService {
   // Directly calling the get-room-list-api while using the pipe method to integrate ShareReplay() operator.
   // The trailing dollar denotes that the variable is a stream.
   getRooms$ = this.http.get<RoomList[]>('http://127.0.0.1:8080/hotel/room-list/', {
-    headers: this.headers
+    // headers: this.headers  // NB: Added the headers of each request in the HttpIntercaptor.
   }).pipe(
     shareReplay(1) // Replay the last one record that we've received
+  );
+
+  // Caching the getPhotos-api to infuse ShareReplay (RxJS operator) using pipe() method to stop hitting the backend server regardless of how many time this api-observable gets subscribed in components.
+  request = new HttpRequest(
+    'GET',
+    'https://jsonplaceholder.typicode.com/photos',
+    { reportProgress: true }
+  );
+  getPhotos$ = this.http.request(this.request).pipe(
+    shareReplay(1)
   );
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig,
@@ -35,6 +46,7 @@ export class RoomService {
     console.log("Room service is initialized");
   }
 
+  // DEPRECATED; USING SHAREREPLAY FOR CACHING
   getRooms() {
     console.log("Calling the getRooms() method to fetch all the rooms from the 'room.service' file");
 
@@ -51,7 +63,9 @@ export class RoomService {
     return this.http.post<RoomList[]>(roomCreateURL, room);
   }
 
-  // Demonstration of loading bulk amount of data from the API
+  // Demonstration of loading bulk amount of data from the API.
+  // DEPRECATED; USING SHAREREPLAY FOR CACHING
+  // Caching this observable event using ShareReplay (RxJS operator), so that it doesn't make multiple calls to the server.
   getPhotos() {
     const request = new HttpRequest(
       'GET',
