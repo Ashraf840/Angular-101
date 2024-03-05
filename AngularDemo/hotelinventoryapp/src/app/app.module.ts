@@ -9,8 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { DummyContentComponent } from './dummy-content/dummy-content.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from '../app/AppConfig/appconfig.service';
+import { RequestInterceptor } from './request.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,16 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from '../app/AppConfig/appconfig.servi
     HttpClientModule,
   ],
   providers: [
+    // Value Providers; Dependency Injection; InjectionToken
     {
       provide: APP_SERVICE_CONFIG,
       useValue: APP_CONFIG
+    },
+    // HttpInterceptor
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
